@@ -1,98 +1,88 @@
-# vinext-starter
+# FDE Job Board
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+A curated job board for **Forward Deployed Engineer** roles across the United States, Europe, India, and globally distributed teams.
 
-## Prerequisites
+Built as a guided career asset for the [AI System Design bootcamp](https://maven.com/boring-bot/ai-system-design).
 
-- Node.js `>=22.13.0`
+**[View the live job board →](https://fde-field-guide.aishwarya-ashok.chatgpt.site)**
 
-## Quick Start
+## Why this exists
+
+Forward Deployed Engineering sits between software engineering, applied AI, product thinking, and customer delivery. The title is still inconsistent across companies, which makes relevant openings surprisingly difficult to find in one place.
+
+This board brings together strong FDE opportunities and closely equivalent deployment-engineering roles without turning the experience into another generic technology-job feed.
+
+## What is included
+
+- 55 current or recently active roles
+- Remote and remote-eligible opportunities
+- A primarily US-focused selection with dedicated Europe and India coverage
+- Exact FDE titles plus a small number of clearly equivalent deployment roles
+- Location eligibility, seniority, compensation, domain, and skill signals
+- Search and filters for region and published compensation
+- Direct links to employer pages or credible specialist listings
+
+## Curation approach
+
+A role is included when it meets most of these signals:
+
+1. The work is explicitly forward deployed, deployment-focused, or embedded with customers.
+2. The engineer is expected to build or integrate production systems—not only advise or sell.
+3. The listing has a clear geographic or remote-work boundary.
+4. The source is an employer careers page or an established specialist job board.
+5. It is not an obvious duplicate or country-specific mirror of the same opening.
+
+Job listings change quickly. Always confirm that the role is still open and that you meet its location requirements before applying.
+
+## Using the board
+
+- Filter by **US**, **Europe**, **India**, or **Global** eligibility.
+- Search by company, technical skill, or domain such as healthcare, voice AI, fintech, or developer tools.
+- Enable **Pay shown** to see only roles with a published compensation range.
+- Use the role tags to distinguish areas such as applied AI, integrations, data platforms, and agent deployment.
+
+## Run locally
+
+Requirements: Node.js 22.13 or newer.
 
 ```bash
 npm install
 npm run dev
+```
+
+Open the local URL printed in the terminal.
+
+To validate a production build:
+
+```bash
 npm run build
 ```
 
-This starter does not use `wrangler.jsonc`.
+## Project structure
 
-## Included Shape
-
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
-
-## Workspace Auth Headers
-
-OpenAI workspace sites can read the current user's email from
-`oai-authenticated-user-email`.
-
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
+```text
+app/page.tsx      Job data, filters, and page structure
+app/globals.css   Editorial visual system and responsive styles
+app/layout.tsx    Page metadata and root layout
+public/           Static assets
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+## Contributing
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+If you find a strong FDE role that should be included, open an issue with:
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+- Company and role title
+- Direct job-posting URL
+- Hiring region
+- Remote, hybrid, or on-site status
+- Published compensation, if available
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+Please avoid recruiter reposts, expired listings, and duplicate geographic mirrors.
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
+## Course
 
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
+The board accompanies the [AI System Design bootcamp by Boring Bot](https://maven.com/boring-bot/ai-system-design), a practical course for designing and building production-grade AI systems.
 
-## Useful Commands
+---
 
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
-
-## Learn More
-
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+Curated and maintained by [Aishwarya Ashok](https://github.com/aishwaryaashok14).
