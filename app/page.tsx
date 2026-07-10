@@ -43,34 +43,18 @@ export default function Home() {
   }), [region, query, onlySalary]);
 
   return <main>
-    <aside className="rail" aria-label="Page sections">
-      <div className="rail-label">FDE FIELD GUIDE</div>
-      <a href="#market">01&nbsp;&nbsp; Market read</a><a href="#roles">02&nbsp;&nbsp; Open roles</a><a href="#patterns">03&nbsp;&nbsp; How to read them</a>
-    </aside>
     <div className="wrap">
       <header className="hero">
-        <div className="eyebrow">AI SYSTEM DESIGN · CAREER ARTIFACT</div>
-        <h1>The Forward Deployed<br/><span>Engineer field guide.</span></h1>
-        <p className="dek">A selective, remote-first board for engineers who want to build at the edge of product, AI, and customer reality.</p>
-        <div className="hero-meta"><span>19 live roles</span><span>4 location lenses</span><span>Verified 10 Jul 2026</span></div>
+        <div className="eyebrow">AI SYSTEM DESIGN · JOB BOARD</div>
+        <h1>Forward Deployed<br/><span>Engineer Jobs.</span></h1>
+        <p className="dek">Remote and remote-eligible roles across the US, Europe, and India.</p>
+        <div className="hero-meta"><span>19 open roles</span><span>US · Europe · India</span><span>Updated 10 Jul 2026</span></div>
         <div className="rule" />
       </header>
 
-      <section id="market" className="market">
-        <div><span className="kicker">THE MARKET, WITHOUT THE HYPE</span><h2>Remote does not mean anywhere.</h2></div>
-        <p>Most FDE hiring is still anchored to the United States—even when the work happens from home. Europe has a smaller but meaningful pocket around Germany, while India is emerging through globally distributed infrastructure companies. Treat location as an eligibility boundary, not a lifestyle tag.</p>
-        <div className="market-grid">
-          <article><b>11</b><span>US-remote roles</span><small>Largest pool, clearest pay bands</small></article>
-          <article><b>2</b><span>Europe-remote roles</span><small>Germany is the current centre</small></article>
-          <article><b>2</b><span>India-accessible roles</span><small>One local, one cross-border</small></article>
-          <article><b>2</b><span>Location-flexible roles</span><small>Verify timezone + payroll</small></article>
-        </div>
-        <blockquote>“Forward deployed” is not one job. It is a spectrum—from integration-heavy implementation to product-shaping applied AI.</blockquote>
-      </section>
-
       <section id="roles">
-        <span className="kicker">CURATED OPENINGS</span><h2>Choose the work pattern, not just the logo.</h2>
-        <p className="sub">Filtered for remote or remote-eligible roles. Apply links may lead to a specialist listing; always confirm the employer’s current posting and your location eligibility.</p>
+        <span className="kicker">OPEN ROLES</span><h2>Find your next FDE role.</h2>
+        <p className="sub">Filter by hiring region, skills, company, or published compensation.</p>
         <div className="toolbar">
           <div className="tabs" role="group" aria-label="Filter by region">{regions.map(r => <button key={r} className={region === r ? "active" : ""} onClick={() => setRegion(r)}>{r}</button>)}</div>
           <label className="search"><span>⌕</span><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search skill, company, lane…" aria-label="Search roles"/></label>
@@ -80,22 +64,11 @@ export default function Home() {
         <div className="jobs">{visible.map(job => <article className={`job ${job.featured ? "featured" : ""}`} key={`${job.company}-${job.title}-${job.location}`}>
           <div className="job-top"><div className="logo">{job.company.slice(0,2).toUpperCase()}</div><div className="job-title"><div className="company">{job.company}{job.featured && <span className="pick">EDITOR’S PICK</span>}</div><h3>{job.title}</h3></div><a className="apply" href={job.url} target="_blank" rel="noreferrer" aria-label={`View ${job.title} at ${job.company}`}>View role ↗</a></div>
           <div className="facts"><span>◎ {job.location}</span><span>◈ {job.level}</span>{job.salary && <span className="salary">{job.salary}</span>}<span className="posted">{job.posted}</span></div>
-          <div className="job-body"><div><div className="micro">ROLE LANE</div><strong>{job.lane}</strong></div><p>{job.fit}</p></div>
-          <div className="tags">{job.signals.map(s=><span key={s}>{s}</span>)}</div>
+          <div className="tags"><span className="lane">{job.lane}</span>{job.signals.map(s=><span key={s}>{s}</span>)}</div>
         </article>)}</div>
         {visible.length === 0 && <div className="empty">No roles match this lens. Try a broader region or search.</div>}
       </section>
-
-      <section id="patterns" className="patterns">
-        <span className="kicker">A BETTER APPLICATION LENS</span><h2>Read the hidden contract.</h2>
-        <div className="pattern-grid">
-          <article><b>01</b><h3>Implementation FDE</h3><p>Success means shipping an unusual integration quickly. Look for APIs, onboarding edge cases, and “beyond standard implementation.”</p><small>Best evidence: a messy system you made reliable.</small></article>
-          <article><b>02</b><h3>Applied AI FDE</h3><p>Success means turning an AI demo into measurable production behaviour. Look for RAG, evaluation, agents, and workflow redesign.</p><small>Best evidence: a model-powered workflow with metrics.</small></article>
-          <article><b>03</b><h3>Platform-shaping FDE</h3><p>Success means finding repeated customer pain and feeding it back into the core product. Look for roadmap influence and reusable primitives.</p><small>Best evidence: field insight that became product.</small></article>
-        </div>
-        <div className="note"><span>FIELD NOTE</span><p>A strong FDE portfolio should show more than code. Include the ambiguous customer problem, the system boundary, the trade-off you made, what shipped, and what became reusable.</p></div>
-      </section>
-      <footer><div><b>FDE FIELD GUIDE</b><span>Built as a companion artifact for AI System Design.</span></div><p>Sources: current employer pages and specialist FDE boards. Roles change quickly—verify before applying.</p></footer>
+      <footer><div><b>FDE JOB BOARD</b><span>A companion artifact for AI System Design.</span></div><p>Roles change quickly. Confirm location eligibility and availability before applying.</p></footer>
     </div>
   </main>;
 }
