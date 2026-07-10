@@ -1,6 +1,6 @@
 # FDE Job Board
 
-A curated job board for **Forward Deployed Engineer** roles across the United States, Europe, India, and globally distributed teams.
+A curated Next.js job board for **Forward Deployed Engineer** roles across the United States, Europe, India, and globally distributed teams.
 
 Built as a guided career asset for the [AI System Design bootcamp](https://maven.com/boring-bot/ai-system-design).
 
