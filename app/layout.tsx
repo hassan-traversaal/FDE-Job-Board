@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "FDE Field Guide — Remote Forward Deployed Engineer Roles",
-  description: "A nuanced, remote-first field guide to current Forward Deployed Engineer opportunities across the US, Europe, and India.",
+  title: "FDE Field Guide | Forward Deployed Engineer Jobs",
+  description: "A curated board of vetted Forward Deployed Engineer (FDE) roles. Browse remote-friendly openings across the US, Europe, and India, with salary, location, and role details.",
   icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
 };
 

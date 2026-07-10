@@ -84,7 +84,7 @@ export default function Home() {
         <a className="eyebrow bootcamp-link" href="https://maven.com/boring-bot/ai-system-design" target="_blank" rel="noreferrer">GUIDED ASSET FOR THE AI SYSTEM DESIGN BOOTCAMP ↗</a>
         <h1>Forward Deployed<br/><span>Engineer Jobs.</span></h1>
         <p className="dek">Remote and remote-eligible roles across the US, Europe, and India.</p>
-        <div className="hero-meta"><span>{jobs.length} vetted roles</span><span>US · Europe · India</span><span>Updated 10 Jul 2026</span></div>
+        <div className="hero-meta"><span>{jobs.length} vetted roles</span><span>US · Europe · India</span></div>
         <div className="rule" />
       </header>
 
