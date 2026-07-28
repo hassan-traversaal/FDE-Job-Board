@@ -14,10 +14,10 @@ This board brings together strong FDE opportunities and closely equivalent deplo
 
 ## What is included
 
-- 42 roles checked or newly added on 28 July 2026
+- 100 roles checked or newly added on 28 July 2026
 - Remote and remote-eligible opportunities
 - A primarily US-focused selection with dedicated Europe and India coverage
-- Exact FDE titles plus a small number of clearly equivalent deployment roles
+- Exact FDE titles plus carefully selected adjacent roles in applied AI, field engineering, implementation, and deployment strategy
 - Location eligibility, seniority, compensation, domain, and skill signals
 - Search and filters for region and published compensation
 - Direct links to employer pages or credible specialist listings
