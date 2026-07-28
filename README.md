@@ -14,7 +14,7 @@ This board brings together strong FDE opportunities and closely equivalent deplo
 
 ## What is included
 
-- 55 current or recently active roles
+- 42 roles checked or newly added on 28 July 2026
 - Remote and remote-eligible opportunities
 - A primarily US-focused selection with dedicated Europe and India coverage
 - Exact FDE titles plus a small number of clearly equivalent deployment roles
@@ -33,6 +33,21 @@ A role is included when it meets most of these signals:
 5. It is not an obvious duplicate or country-specific mirror of the same opening.
 
 Job listings change quickly. Always confirm that the role is still open and that you meet its location requirements before applying.
+
+## Freshness and maintenance
+
+The date shown on the board is the last human-reviewed refresh, not the date the website was deployed. A role is removed from the rendered board when its detail page disappears, the employer marks it closed, or the source no longer includes it in the current feed.
+
+The recommended maintenance loop is:
+
+1. Pull current roles from direct employer APIs and selected FDE feeds every day.
+2. Normalize title, company, geography, compensation, source URL, and source ID into a structured jobs file.
+3. De-duplicate by employer plus title plus location, preferring the direct employer URL.
+4. Recheck every active URL daily; remove `404`/`410` listings immediately and queue ambiguous pages for review.
+5. Publish new roles automatically only when required fields and location eligibility are present.
+6. Send a weekly review report for uncertain matches, stale listings, and newly discovered companies.
+
+For a production version, store jobs in a small database rather than inside the page component. Keep `firstSeenAt`, `lastSeenAt`, `lastVerifiedAt`, `status`, `source`, and `sourceJobId` for every record. This makes changes auditable and prevents an old listing from silently remaining live.
 
 ## Using the board
 
