@@ -174,13 +174,25 @@ const jobs: Job[] = [
 
 const regions = ["All", "US", "Europe", "India", "Global"] as const;
 
+function roleFamily(job: Job) {
+  const title = job.title.toLowerCase();
+  if (/intern|junior|associate|entry/.test(title) || /^(entry|junior)/i.test(job.level)) return "Early Career";
+  if (/director|manager|leader|lead\b|head|executive|chief|cto|svp|vice president/.test(title)) return "Leadership";
+  if (/strategist|strategy|product owner|technical deployment/.test(title)) return "Deployment Strategy";
+  if (/architect/.test(title)) return "Field Architecture";
+  if (/data|analytics/.test(title)) return "Data Engineering";
+  if (/ai|machine learning|\bml\b|genai|agentic|agents/.test(title)) return "Applied AI / ML";
+  if (/solution|implementation|customer engineer|field engineer/.test(title)) return "Solutions / Implementation";
+  return "Core FDE";
+}
+
 export default function Home() {
   const [region, setRegion] = useState<(typeof regions)[number]>("All");
   const [query, setQuery] = useState("");
   const [onlySalary, setOnlySalary] = useState(false);
   const visible = useMemo(() => jobs.filter((job) => {
     const regionMatch = region === "All" || job.region === region;
-    const haystack = `${job.company} ${job.title} ${job.lane} ${job.signals.join(" ")}`.toLowerCase();
+    const haystack = `${job.company} ${job.title} ${roleFamily(job)} ${job.lane} ${job.signals.join(" ")}`.toLowerCase();
     return regionMatch && (!onlySalary || Boolean(job.salary)) && haystack.includes(query.toLowerCase());
   }), [region, query, onlySalary]);
 
@@ -206,7 +218,7 @@ export default function Home() {
         <div className="jobs">{visible.map(job => <article className={`job ${job.featured ? "featured" : ""}`} key={`${job.company}-${job.title}-${job.location}`}>
           <div className="job-top"><div className="logo">{job.company.slice(0,2).toUpperCase()}</div><div className="job-title"><div className="company">{job.company}{job.featured && <span className="pick">EDITOR’S PICK</span>}</div><h3>{job.title}</h3></div><a className="apply" href={job.url} target="_blank" rel="noreferrer" aria-label={`View ${job.title} at ${job.company}`}>View role ↗</a></div>
           <div className="facts"><span>◎ {job.location}</span><span>◈ {job.level}</span>{job.salary && <span className="salary">{job.salary}</span>}<span className="posted">{job.posted}</span></div>
-          <div className="tags"><span className="lane">{job.lane}</span>{job.signals.map(s=><span key={s}>{s}</span>)}</div>
+          <div className="tags"><span className="role-family">{roleFamily(job)}</span><span className="lane">{job.lane}</span>{job.signals.map(s=><span key={s}>{s}</span>)}</div>
         </article>)}</div>
         {visible.length === 0 && <div className="empty">No roles match this lens. Try a broader region or search.</div>}
       </section>

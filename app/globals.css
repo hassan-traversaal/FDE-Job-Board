@@ -5,3 +5,4 @@
 @media(max-width:760px){.wrap{width:min(100% - 28px,900px)}.hero{padding-top:56px}h1{font-size:44px}.dek{font-size:20px}.hero-meta{flex-wrap:wrap;gap:8px 18px}.toolbar{grid-template-columns:1fr;position:relative}.tabs{overflow:auto}.search{grid-row:1}.job{padding:16px}.job-top{align-items:flex-start}.apply{font-size:0}.apply::after{content:'↗';font-size:20px}.facts .posted{margin-left:0}footer{flex-direction:column}footer p{text-align:left}}
 @media(max-width:420px){h1{font-size:38px}.tabs button{padding:8px 9px}.logo{display:none}}
 .bootcamp-link{text-decoration:none;border-bottom:1px solid rgba(216,67,63,.35);padding-bottom:3px}.bootcamp-link:hover{color:var(--ink)}footer a{color:var(--coral-ink);text-decoration:none}footer a:hover{text-decoration:underline}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.job{transition:none}}
+.tags .role-family{background:var(--navy);color:white;font-weight:700}
