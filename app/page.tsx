@@ -173,6 +173,7 @@ const jobs: Job[] = [
 ];
 
 const regions = ["All", "US", "Europe", "India", "Global"] as const;
+const roleFamilies = ["All roles", "Core FDE", "Applied AI / ML", "Data Engineering", "Solutions / Implementation", "Deployment Strategy", "Field Architecture", "Leadership", "Early Career"] as const;
 
 function roleFamily(job: Job) {
   const title = job.title.toLowerCase();
@@ -188,13 +189,15 @@ function roleFamily(job: Job) {
 
 export default function Home() {
   const [region, setRegion] = useState<(typeof regions)[number]>("All");
+  const [family, setFamily] = useState<(typeof roleFamilies)[number]>("All roles");
   const [query, setQuery] = useState("");
   const [onlySalary, setOnlySalary] = useState(false);
   const visible = useMemo(() => jobs.filter((job) => {
     const regionMatch = region === "All" || job.region === region;
+    const familyMatch = family === "All roles" || roleFamily(job) === family;
     const haystack = `${job.company} ${job.title} ${roleFamily(job)} ${job.lane} ${job.signals.join(" ")}`.toLowerCase();
-    return regionMatch && (!onlySalary || Boolean(job.salary)) && haystack.includes(query.toLowerCase());
-  }), [region, query, onlySalary]);
+    return regionMatch && familyMatch && (!onlySalary || Boolean(job.salary)) && haystack.includes(query.toLowerCase());
+  }), [region, family, query, onlySalary]);
 
   return <main>
     <div className="wrap">
@@ -213,6 +216,9 @@ export default function Home() {
           <div className="tabs" role="group" aria-label="Filter by region">{regions.map(r => <button key={r} className={region === r ? "active" : ""} onClick={() => setRegion(r)}>{r}</button>)}</div>
           <label className="search"><span>⌕</span><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search skill, company, lane…" aria-label="Search roles"/></label>
           <label className="check"><input type="checkbox" checked={onlySalary} onChange={e=>setOnlySalary(e.target.checked)}/><span/> Pay shown</label>
+        </div>
+        <div className="family-chips" role="group" aria-label="Filter by role family">
+          {roleFamilies.map(item => <button key={item} className={family === item ? "active" : ""} aria-pressed={family === item} onClick={() => setFamily(item)}>{item}</button>)}
         </div>
         <div className="count">SHOWING {visible.length} OF {jobs.length} ROLES</div>
         <div className="jobs">{visible.map(job => <article className={`job ${job.featured ? "featured" : ""}`} key={`${job.company}-${job.title}-${job.location}`}>
