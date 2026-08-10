@@ -408,7 +408,7 @@ export default function Home() {
           <div className="sourcing-body">
             <p>Roles are pulled from two specialist boards — <a href="https://www.fwddeploy.com/s/remote-jobs" target="_blank" rel="noreferrer">FWDDeploy.com</a> and <a href="https://deployaijobs.com/jobs" target="_blank" rel="noreferrer">DeployAI Jobs</a> — plus a handful of direct employer career pages, Indeed, and Ashby. Each candidate is checked against a few criteria before it&apos;s included: the work is explicitly forward-deployed or customer-embedded (not just advisory), it has a clear remote or geographic eligibility, and it isn&apos;t an obvious duplicate posting.</p>
             <p>The board is refreshed by re-crawling those sources and adding anything new since the last pass — most recently on 10 Aug 2026, covering roles posted between 28 Jul and 10 Aug 2026. Dates come straight from each source; where a source only reports an approximate age (e.g. &ldquo;about a week ago&rdquo; instead of an exact day), the listing shows a date range rather than a guessed exact date.</p>
-            <p>This is a semi-automated process, not a live API — expect the occasional stale or duplicate listing. Always confirm a role is still open before applying.</p>
+            <p>Always confirm a role is still open before applying.</p>
           </div>
         </details>
       </header>
