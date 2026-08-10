@@ -406,7 +406,7 @@ export default function Home() {
         <details className="sourcing">
           <summary>How we gather these listings</summary>
           <div className="sourcing-body">
-            <p>Roles are pulled from two specialist boards — <a href="https://www.fwddeploy.com/s/remote-jobs" target="_blank" rel="noreferrer">FWDDeploy.com</a> and <a href="https://deployaijobs.com/jobs" target="_blank" rel="noreferrer">DeployAI Jobs</a> — plus a handful of direct employer career pages, Indeed, and Ashby. Each candidate is checked against a few criteria before it&apos;s included: the work is explicitly forward-deployed or customer-embedded (not just advisory), it has a clear remote or geographic eligibility, and it isn&apos;t an obvious duplicate posting.</p>
+            <p>Roles are pulled from <a href="https://www.fwddeploy.com/s/remote-jobs" target="_blank" rel="noreferrer">FWDDeploy.com</a>, <a href="https://deployaijobs.com/jobs" target="_blank" rel="noreferrer">DeployAI Jobs</a>, and a handful of direct employer pages, Indeed, and Ashby listings. Each one is checked for explicit forward-deployed or customer-embedded work, clear remote or geographic eligibility, and no obvious duplicate posting.</p>
             <p>Always confirm a role is still open before applying.</p>
           </div>
         </details>
