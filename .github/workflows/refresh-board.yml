@@ -1,0 +1,40 @@
+name: Refresh job board
+
+on:
+  schedule:
+    # Every Monday 09:00 UTC
+    - cron: "0 9 * * 1"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install script dependencies
+        run: npm install --no-save cheerio
+
+      - name: Run refresh script
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/refresh-board.mjs
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "FDE Board Bot"
+          git config user.email "actions@github.com"
+          if git diff --quiet app/page.tsx; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git add app/page.tsx
+          git commit -m "Automated weekly refresh $(date -u +%Y-%m-%d)"
+          git push
