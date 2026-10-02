@@ -1099,7 +1099,7 @@
 .course {
   position: relative;
   overflow: hidden;
-  background: #fff;
+  background: var(--coral-soft);
   padding-block: var(--sec);
 }
 
