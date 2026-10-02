@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // The free course is its own app (FastAPI + plain browser JS), deployed to Fly.
+    "course/**",
   ]),
 ]);
 

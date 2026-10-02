@@ -41,8 +41,14 @@ kill_timeout = '30s'
   # Set explicitly so the app never has to trust x-forwarded-host, which a
   # caller controls. Add the custom domain here, comma separated, when one is
   # pointed at this app.
-  PUBLIC_ORIGIN = 'https://fde-traversaal-academy.fly.dev'
+  # fde.traversaal.ai serves /signin, /library and /session/<n> from this app
+  # through rewrites (../next.config.ts), so sessions are minted there too.
+  PUBLIC_ORIGIN = 'https://fde-traversaal-academy.fly.dev,https://fde.traversaal.ai'
   HAMZA_API_URL = 'https://claude.traversaal.ai'
+  # The landing page is the FDE site's; this app's "/" redirects to it. Deploy
+  # the FDE site with its course rewrites first, or this sends people to a home
+  # page with no way into the course.
+  HOME_URL = 'https://fde.traversaal.ai'
 
 [http_service]
   internal_port = 8080      # the --port in the Dockerfile CMD

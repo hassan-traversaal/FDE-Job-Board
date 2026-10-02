@@ -49,6 +49,13 @@ def get(key: str, default: str = "") -> str:
 
 PORT = int(get("PORT", "8300"))
 
+#: The site this course sits inside (https://fde.traversaal.ai). That site owns
+#: "/" and serves /signin, /library and /session/<n> from this app through
+#: rewrites, so a visitor stays on one domain. When set, this app's own welcome
+#: page steps aside and "/" sends people to that site's home. Unset (local runs
+#: on their own), the welcome page shows as before.
+HOME_URL = get("HOME_URL").rstrip("/")
+
 #: The bot's mode. "demo" answers from the transcripts on this machine (curated
 #: answers for the suggested questions, transcript search for anything else).
 #: Swap in the real MomentSearch pipeline by pointing MOMENT_API_URL at a

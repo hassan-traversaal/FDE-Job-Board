@@ -12,7 +12,10 @@
     "test": "npm run build",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
-    "refresh-board": "node scripts/refresh-board.mjs"
+    "refresh-board": "node scripts/refresh-board.mjs",
+    "test:lead": "node --test scripts/check-lead.mjs",
+    "test:site": "node scripts/check-site.mjs",
+    "course:dev": "python3 course/app.py"
   },
   "dependencies": {
     "drizzle-orm": "0.45.2",

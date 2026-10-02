@@ -21,6 +21,12 @@
 # misc
 .DS_Store
 *.pem
+# macOS writes these AppleDouble files next to every file on FAT/exFAT volumes
+._*
+*.tsbuildinfo
+
+# the free course's local Python environment (see README)
+.course-venv/
 
 # debug
 npm-debug.log*
@@ -30,6 +36,8 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# templates with placeholders only, never values
+!.env.example
 
 # vercel
 .vercel

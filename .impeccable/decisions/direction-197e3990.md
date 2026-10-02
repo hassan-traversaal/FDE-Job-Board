@@ -1,0 +1,1 @@
+Direction round 2026-10-01. Seed header: DIRECTION CONCEPT SEED (key: 197e3990; mode: persuade). Assigned index 3 (Mission Operations). Decision key 89fffa90 answer: {"optionId":"model-pick","buildPath":"code"} -> The Field Manual (rank 1).

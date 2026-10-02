@@ -3,14 +3,14 @@
 //
 // Pulls new listings from fwddeploy.com and deployaijobs.com, uses Claude to
 // judge curation fit and classify each one (region/level/lane/signals), and
-// appends genuinely new roles to the `jobs` array in app/page.tsx.
+// appends genuinely new roles to the `jobs` array in app/(board)/jobs/data.ts.
 //
 // Requires: ANTHROPIC_API_KEY env var. Run with `node scripts/refresh-board.mjs`.
 
 import { readFileSync, writeFileSync } from "fs";
 import * as cheerio from "cheerio";
 
-const PAGE_PATH = new URL("../app/page.tsx", import.meta.url);
+const PAGE_PATH = new URL("../app/(board)/jobs/data.ts", import.meta.url);
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 const CLASSIFY_MODEL = "claude-haiku-4-5-20251001";
 const MAX_DAYS_AGO = 10; // buffer beyond the 7-day cadence to survive a missed run

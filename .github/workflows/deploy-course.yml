@@ -1,0 +1,118 @@
+# Deploy the free Level 1 course (course/) to Fly.io.
+#
+#   https://fde-traversaal-academy.fly.dev, served on fde.traversaal.ai through
+#   the rewrites in next.config.ts
+#
+# Copied from traversaal-ai/Claude-Code-Traversaal-Academy (commit 55b1235),
+# with every step running inside course/. Manual for now: that repo still
+# deploys the same Fly app on each push to its main, and two repos pushing
+# releases would overwrite each other. Once this repo is the course's only
+# source, add the push trigger below (paths: course/**, minus docs and scripts).
+#
+# SETUP (once): mint a deploy token scoped to this one app,
+#   fly tokens create deploy -a fde-traversaal-academy
+# and add it as a repository secret named FLY_API_TOKEN: Settings → Secrets and
+# variables → Actions → New repository secret. The app's own config (Clerk,
+# GCS, Hamza) is already in `fly secrets`; nothing else goes into GitHub.
+name: Deploy
+
+on:
+  # push:
+  #   branches: [main]
+  #   paths:
+  #     - "course/**"
+  #     - "!course/**/*.md"
+  #     - "!course/scripts/**"
+  #     - "!course/.env.example"
+  # Deploy from the Actions tab.
+  workflow_dispatch:
+
+env:
+  HEALTH_URL: https://fde-traversaal-academy.fly.dev/healthz
+
+jobs:
+  deploy:
+    name: fde-traversaal-academy
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: course
+    concurrency:
+      # One deploy at a time. NOT cancel-in-progress: cancelling a half-applied
+      # Fly release leaves the machine in whichever state it reached. Queue.
+      group: fly-deploy
+      cancel-in-progress: false
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Fail with a sentence a human can act on, not flyctl's generic auth error.
+      - name: Check the deploy token is present
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        run: |
+          if [ -z "$FLY_API_TOKEN" ]; then
+            echo "::error::No Fly token. Add a repository secret named FLY_API_TOKEN (fly tokens create deploy -a fde-traversaal-academy) under Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+
+      # Before spending a Fly build: the app imports, and every data/*.json it
+      # reads at startup parses. A hand-edited chapter file with a stray comma
+      # fails here, in a minute, with the file named, rather than as a
+      # blue-green deploy that never goes healthy.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: course/requirements.txt
+      - name: Check the app starts
+        env:
+          ALLOW_PUBLIC: "true"     # no Clerk keys on the runner, and none needed
+        run: |
+          pip install -r requirements.txt
+          python - <<'EOF'
+          from fastapi.testclient import TestClient
+          import app
+          r = TestClient(app.app).get("/healthz")
+          assert r.status_code == 200, f"/healthz answered {r.status_code}: {r.text[:300]}"
+          h = r.json()
+          assert h["sessions"] > 0 and h["chapters"] > 0, f"empty catalog: {h}"
+          print("app starts:", h)
+          EOF
+
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+
+      # --remote-only: build on Fly's builder, so the runner needs no Docker.
+      # --ha=false: one machine, on purpose (fly.toml explains why). The
+      # blue-green strategy in fly.toml means this returns only once the new
+      # machine passes /healthz and has the traffic.
+      - name: Deploy
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        run: flyctl deploy --remote-only --ha=false
+
+      # A green deploy means the release applied and /healthz answered 200.
+      # This checks it is the RIGHT kind of healthy: sign-in armed (not
+      # misconfigured by a missing secret), and, as warnings, the live bot and
+      # the recordings, which degrade rather than break.
+      - name: Smoke-test the live site
+        run: |
+          for i in $(seq 1 10); do
+            body=$(curl -fsS --max-time 20 "$HEALTH_URL" 2>/dev/null) && break
+            echo "attempt $i: not answering yet"; body=""; sleep 10
+          done
+          [ -n "$body" ] || { echo "::error::$HEALTH_URL did not answer. Check: flyctl logs -a fde-traversaal-academy"; exit 1; }
+          echo "healthz: $body"
+          python3 - "$body" <<'EOF'
+          import json, sys
+          h = json.loads(sys.argv[1])
+          if h.get("auth") != "on":
+              print(f"::error::sign-in is '{h.get('auth')}', not 'on'. Are CLERK_PUBLISHABLE_KEY and CLERK_SECRET_KEY in fly secrets?")
+              sys.exit(1)
+          if h.get("bot") != "live":
+              print("::warning::the bot is in demo mode: HAMZA_API_KEY missing from fly secrets?")
+          if h.get("recordings", 0) < h.get("sessions", 0):
+              print(f"::warning::{h.get('recordings')} of {h.get('sessions')} recordings found: check STORAGE_BUCKET and the GOOGLE_CLOUD_* secrets.")
+          print("live and signed-in only")
+          EOF

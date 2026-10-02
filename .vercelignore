@@ -1,0 +1,2 @@
+# The free course (course/) deploys to Fly from its own Dockerfile; this site only proxies to it.
+course/

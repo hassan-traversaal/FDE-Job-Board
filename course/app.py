@@ -4,7 +4,7 @@
     python app.py --port 9000 --host 0.0.0.0
 
 Pages (static shells; their data comes from the gated API):
-    /                 the welcome page, public
+    /                 the welcome page, public (or a redirect to HOME_URL, the site this course sits in)
     /signin           Clerk sign-up / sign-in
     /library          the session library        (sign-in required)
     /session/<n>      one session: player, chapters, transcript, bot
@@ -109,6 +109,9 @@ def _over_limit(wait_s: int) -> Response:
 
 @app.get("/")
 def index():
+    if config.HOME_URL:
+        # Inside fde.traversaal.ai the landing page is that site's; it links in through /signin.
+        return RedirectResponse(config.HOME_URL + "/", status_code=307)
     return _page(PAGES["/"])
 
 

@@ -1,5 +1,12 @@
 # Traversaal Academy · Claude Code in Practice
 
+> **Inside the FDE site.** This folder is the free Level 1 course of fde.traversaal.ai. It was moved in from
+> traversaal-ai/Claude-Code-Traversaal-Academy at `55b1235`; that repo keeps the history. The FDE site owns
+> `/` and serves `/signin`, `/library`, `/session/<n>`, `/assets`, `/media` and this app's `/api/*` through
+> rewrites (`../next.config.ts`). With `HOME_URL` set, this app's own welcome page redirects to the FDE home.
+> Commands below run from this folder. Deploys use `fly.toml` here, or the manual workflow
+> `../.github/workflows/deploy-course.yml`. See `../README.md`, "The free course".
+
 Our highest-rated course, open-sourced: five live sessions with Hamza Farooq and
 Aishwarya Ashok, free to watch, cut into chapters, each with a bot that answers
 from the recording and jumps to the exact second.
