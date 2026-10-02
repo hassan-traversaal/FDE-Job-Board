@@ -41,7 +41,7 @@ export const hero = {
     { pre: "We ", mark: "build", post: " enterprise AI agents for Fortune 500." },
     { pre: "We ", mark: "teach", post: " you how." },
   ],
-  sub: "Our forward deployed engineers embed with your team to build AI agents. Our courses and trainings are separate: they teach your engineers to build their own.",
+  sub: "Our forward deployed engineers embed with your team to build AI agents. Our courses and trainings teach your engineers to build their own.",
   primary: "Start the free course",
   secondary: "Work with us",
   lead: "Led by Hamza Farooq",
@@ -64,7 +64,7 @@ export const heroSystem = {
     { name: "Monitoring", note: "Every run traced" },
     { name: "Human review", note: "For high-risk actions" },
   ],
-  chips: ["Our FDEs, embedded with your team", "Our FDE trainings, taught separately"],
+  chips: ["Our FDEs, embedded with your team", "Our FDE trainings"],
   // One line per system for the interactive hero: what the agent does when that system fires.
   events: [
     "Ticket read, refund policy found, reply drafted",
