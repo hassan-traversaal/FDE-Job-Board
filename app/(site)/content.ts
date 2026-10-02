@@ -41,7 +41,7 @@ export const hero = {
     { pre: "We ", mark: "build", post: " enterprise AI agents." },
     { pre: "We ", mark: "teach", post: " you how." },
   ],
-  sub: "Our forward deployed engineers embed with your team and ship AI agents to production. Our courses teach you to build them yourself, and we run custom training for whole teams. The first course is complimentary.",
+  sub: "Our forward deployed engineers embed with your team and ship AI agents to production. Our courses teach you to build them yourself.",
   primary: "Start the free course",
   secondary: "Work with us",
   lead: "Led by Hamza Farooq",
@@ -102,8 +102,8 @@ export const learn = {
   offers: [
     {
       level: "Level 1",
-      name: "Claude Code in Practice",
-      detail: "Five recorded live sessions with Hamza Farooq and Aishwarya Ashok, in 49 chapters, with a bot that answers from the recordings.",
+      name: "Claude Code for Forward Deployed Engineering",
+      detail: "Five recorded sessions with Hamza Farooq, cut into short chapters. Learn at your own pace.",
       badge: "Free",
       href: links.freeCourse,
       external: false,
@@ -178,8 +178,8 @@ export const method = {
 /** The free Level 1 course. Facts from course/data (course.json and the five sessions). */
 export const course = {
   title: "Take our first course for free.",
-  name: "Claude Code in Practice",
-  body: "Claude Code in Practice is our highest-rated course, recorded live: five sessions with Hamza Farooq and Aishwarya Ashok, from your first CLAUDE.md to subagents, agent teams, evals and deployment. Each session is cut into chapters. When one raises a question, ask it in Moment Search: it answers from the recordings and jumps to the second that covers it. One free account opens every session and keeps your place.",
+  name: "Claude Code for Forward Deployed Engineering",
+  body: "Five recorded sessions with Hamza Farooq and Aishwarya Ashok, cut into short chapters. Ask a question and Moment Search jumps to the second in the recordings that answers it. One free account keeps your place.",
   cta: "Start the free course",
   anatomy: ["Sessions", "Chapters", "Video", "Transcript", "Moment Search"],
   // The illustration below: real session and chapter titles, and one of the course's suggested questions.

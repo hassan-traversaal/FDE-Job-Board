@@ -13,14 +13,14 @@ The first version has two main paths: Learn (the free Level 1 course, the Maven 
 | `/work-with-us` | this site | Short form to discuss an implementation, with Hamza and Jaya's profiles |
 | `/jobs` | this site | Server-rendered tracked roles with search, region, role-family and pay filters |
 | `/signin` | course app | Free account for the Level 1 course (Clerk sign-up and sign-in) |
-| `/library` | course app | The five sessions of Claude Code in Practice (signed in) |
+| `/library` | course app | The five sessions of Claude Code for Forward Deployed Engineering (signed in) |
 | `/session/<n>` | course app | One session: player, chapters, transcript and the bot (signed in) |
 
 Every "Start the free course" link goes to `/signin?next=/library`. A signed-in visitor goes straight to the library.
 
 ## The free course (`course/`)
 
-`course/` is the Level 1 course, Claude Code in Practice. It was moved in from [traversaal-ai/Claude-Code-Traversaal-Academy](https://github.com/traversaal-ai/Claude-Code-Traversaal-Academy) at commit `55b1235`, and its full history stays in that repo. It is a FastAPI app with plain HTML and JS pages, deployed on its own to Fly.io as `fde-traversaal-academy`. `course/README.md` covers its sign-in, bot, progress and deploy in detail.
+`course/` is the Level 1 course, Claude Code for Forward Deployed Engineering. It was moved in from [traversaal-ai/Claude-Code-Traversaal-Academy](https://github.com/traversaal-ai/Claude-Code-Traversaal-Academy) at commit `55b1235`, and its full history stays in that repo. It is a FastAPI app with plain HTML and JS pages, deployed on its own to Fly.io as `fde-traversaal-academy`. `course/README.md` covers its sign-in, bot, progress and deploy in detail.
 
 This site serves the course on its own domain. `next.config.ts` rewrites the course's pages, `/assets`, `/auth/config`, `/media` and its `/api/*` routes to the course app. `/api/lead` stays with this site. As a result, the course's logo and "Back" links land on this home page. The course app's own welcome page is not used: with `HOME_URL` set, its `/` redirects here.
 

@@ -51,7 +51,7 @@ console.log(`PASS shared dataset: ${boardCount} tracked roles`);
 const signin = await fetch(new URL("/signin?next=/library", base)).catch(() => null);
 if (signin?.ok) {
   const $ = load(await signin.text());
-  assert.match($("title").text(), /Claude Code in Practice/, "/signin should be the course's sign-in page");
+  assert.match($("title").text(), /Claude Code for Forward Deployed Engineering/, "/signin should be the course's sign-in page");
   for (const path of ["/auth/config", "/api/course"]) {
     const response = await fetch(new URL(path, base));
     assert.equal(response.status, 200, `${path} must reach the course app`);

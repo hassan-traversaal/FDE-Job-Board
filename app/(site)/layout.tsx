@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://fde.traversaal.ai"),
   title: "Forward Deployed Engineering | Traversaal",
   description:
-    "Traversaal builds enterprise AI agents and teaches engineers to build them. Work with our forward deployed engineers, or start with our free Level 1 course, Claude Code in Practice.",
+    "Traversaal builds enterprise AI agents and teaches engineers to build them. Work with our forward deployed engineers, or start with our free Level 1 course, Claude Code for Forward Deployed Engineering.",
   openGraph: {
     title: "We build enterprise AI agents. We teach you how.",
     description: "Learn FDE with Traversaal, starting with a free course, or work with our forward deployed engineers.",

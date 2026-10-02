@@ -51,7 +51,7 @@
   const faces = names => `<span class="faces">${(names || []).map(n => face(n) ? `<img src="/${esc(face(n))}" alt="">` : "").join("")}</span>`;
   const label = S.bonus ? "Bonus session" : `Session ${S.number}`;
 
-  document.title = `${S.title} · Claude Code in Practice`;
+  document.title = `${S.title} · Claude Code for Forward Deployed Engineering`;
   $("#crumbSession").textContent = `${label} · ${S.title}`;
   $("#askTitle").textContent = S.bonus ? "Ask the bonus session" : `Ask Session ${S.number}`;
   $("#askSub").textContent = `It has heard all ${dur(D)}. Answers cite the exact moment.`;

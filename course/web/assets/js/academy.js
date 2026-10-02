@@ -303,7 +303,7 @@
   /* ---------- the end of the course ---------- */
   A.congratsHTML = (st, inline) => `
     <div class="cg-k"><span class="cg-spark" aria-hidden="true">✻</span>Course complete</div>
-    <h2 class="cg-t" id="cgT">You finished <em>Claude Code in Practice.</em></h2>
+    <h2 class="cg-t" id="cgT">You finished <em>Claude Code for Forward Deployed Engineering.</em></h2>
     <p class="cg-p">All ${st.sessions} sessions and ${st.chapters} chapters, ${A.dur(st.duration)} of live class, start to finish. That is the whole course. Well done.</p>
     <div class="cg-more">
       <p>Want to keep going? Hamza Farooq teaches more courses on Maven.</p>

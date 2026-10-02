@@ -1,4 +1,4 @@
-# Traversaal Academy · Claude Code in Practice
+# Traversaal Academy · Claude Code for Forward Deployed Engineering
 
 > **Inside the FDE site.** This folder is the free Level 1 course of fde.traversaal.ai. It was moved in from
 > traversaal-ai/Claude-Code-Traversaal-Academy at `55b1235`; that repo keeps the history. The FDE site owns

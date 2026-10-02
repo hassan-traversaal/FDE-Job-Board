@@ -21,7 +21,7 @@ Next.js 16 (App Router, TypeScript) in the existing FDE job-board repo, deployed
 fde.traversaal.ai is Traversaal's main FDE destination. Its v1 message: **Traversaal is an FDE company, and it also teaches FDE.** It routes each visitor to one of two pillars and nothing more:
 
 1. **Learn**: Traversaal teaches FDE.
-   - Claude Code in Practice, Level 1: a free course (`course/`, served on this domain at /signin, /library and /session/<n>). This is the lead offer ("Take our first course for free").
+   - Claude Code for Forward Deployed Engineering, Level 1: a free course (`course/`, served on this domain at /signin, /library and /session/<n>). This is the lead offer ("Take our first course for free").
    - The Forward Deployed Engineering Bootcamp on Maven: a live paid cohort.
    - Training for groups and teams: private enterprise programs.
 2. **Work with us**: Traversaal does FDE work. Companies engage Traversaal's forward deployed engineers for implementation.
@@ -38,7 +38,7 @@ Success: engineers start the free course; companies and team leads start a conve
 
 ## Operating Context
 
-- The free course is Claude Code in Practice: five recorded live sessions with Hamza Farooq and Aishwarya Ashok (Cohort 02, June 2026), 49 chapters, transcripts, and a bot powered by Moment Search that answers from the recordings and jumps to the second. A free account (Clerk) opens it and keeps progress. Learners take the course first; Moment Search is where they ask questions. Moment Search is not an entry point.
+- The free course is Claude Code for Forward Deployed Engineering: five recorded live sessions with Hamza Farooq and Aishwarya Ashok (Cohort 02, June 2026), 49 chapters, transcripts, and a bot powered by Moment Search that answers from the recordings and jumps to the second. A free account (Clerk) opens it and keeps progress. Learners take the course first; Moment Search is where they ask questions. Moment Search is not an entry point.
 - Deliberately deferred from v1, but planned under this domain later: blog, FDE bench, interview prep, hiring, and a broader FDE marketplace. Hamza Farooq agreed to "start with two" pillars to keep v1 quiet.
 - Maven bootcamp facts (public): Forward Deployed Engineering Bootcamp, 6-week live cohort, next cohort 14 November to 25 December 2026, $2,500 per seat, 4.9 from 55 ratings, maven.com/boring-bot/ai-system-design.
 - Enterprise team training also has a separate page and brochure (repo traversaal-ai/fde-enterprise-training, preview at fde-enterprise-training.vercel.app). This site no longer offers the brochure (removed 2026-10-02); /teams says a design session decides what is taught.

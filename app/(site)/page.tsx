@@ -4,7 +4,6 @@ import { Arrow, Btn, ext, TrainedLogos } from "./chrome";
 import { Reveal } from "./Reveal";
 import { ReviewWall } from "./ReviewWall";
 import { reviews, reviewSource } from "./reviews";
-import { Pausable } from "./Pausable";
 import { AgentSystem } from "./AgentSystem";
 import { jobStats } from "./jobStats";
 import { roleHighlights as roles, type RoleHighlight } from "./roleHighlights";
@@ -217,12 +216,12 @@ export default function Home() {
               {market.cta}
             </Btn>
           </div>
-          <Pausable className="lanes-wrap" label="role ticker">
+          <div className="lanes-wrap">
             <div className="lanes" role="group" aria-label="Recent roles from the job board. Each one opens the listing in a new tab.">
               <Lane items={roles.slice(0, half)} />
               <Lane items={roles.slice(half)} reverse />
             </div>
-          </Pausable>
+          </div>
         </section>
 
         {/* Free course */}

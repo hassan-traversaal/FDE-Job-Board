@@ -96,7 +96,7 @@ export default function JobsPage() {
             <aside className="bcta" aria-labelledby="bcta-title">
               <span className="bcta__tag">Free</span>
               <h2 id="bcta-title">Get ready for these roles.</h2>
-              <p>Start with our free Level 1 course, Claude Code in Practice. Then go deeper in the live bootcamp with Hamza Farooq.</p>
+              <p>Start with our free Level 1 course, Claude Code for Forward Deployed Engineering. Then go deeper in the live bootcamp with Hamza Farooq.</p>
               <a className="btn btn--coral" href={links.freeCourse}>
                 <span>Start the free course</span>
                 <Arrow />

@@ -1,4 +1,4 @@
-"""Traversaal Academy · Claude Code in Practice
+"""Traversaal Academy · Claude Code for Forward Deployed Engineering
 
     python app.py                       http://127.0.0.1:8300
     python app.py --port 9000 --host 0.0.0.0

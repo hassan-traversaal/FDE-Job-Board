@@ -696,9 +696,9 @@
   animation-duration: 80s;
 }
 
+/* The ticker always moves; it holds still only while a cursor or keyboard focus is on it. */
 .lanes:hover .lane,
 .lanes:focus-within .lane,
-.is-paused .lane,
 .is-paused .rrow {
   animation-play-state: paused;
 }
@@ -2573,28 +2573,23 @@ button.btn:disabled {
     transform: none;
   }
 
-  [data-motion="auto"] .lane,
+  /* The job ticker is left moving on purpose (see .lanes above). Only the review rows
+     become a static, scrollable row until someone presses Play. */
   [data-motion="auto"] .rrow {
     animation: none;
   }
 
-  [data-motion="auto"] .rrows,
-  [data-motion="auto"] .lanes {
+  [data-motion="auto"] .rrows {
     overflow-x: auto;
     mask-image: none;
     -webkit-mask-image: none;
-  }
-
-  [data-motion="auto"] .lanes {
-    padding-inline: var(--gutter);
   }
 
   [data-motion="auto"] .rrow--slow {
     margin-left: 0;
   }
 
-  [data-motion="auto"] .rrow__track[aria-hidden="true"],
-  [data-motion="auto"] .lane__track[aria-hidden="true"] {
+  [data-motion="auto"] .rrow__track[aria-hidden="true"] {
     display: none;
   }
 }
