@@ -182,7 +182,7 @@ export default function Home() {
                 ))}
               </ul>
               <div className="door__acts">
-                <Btn href={links.contact}>
+                <Btn href={links.contact} tone="ink">
                   {work.cta}
                 </Btn>
                 <a className="textlink" href="#method">

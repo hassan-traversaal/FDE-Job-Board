@@ -48,8 +48,9 @@ export const hero = {
   leadRole: "adjunct professor at UCLA and UMN, Stanford Continuing Studies instructor, ex-Google and Walmart Labs",
 };
 
-/** Labels for the hero illustration (AgentSystem.tsx). Generic and synthetic: no customer systems. */
+/** The hero card (AgentSystem.tsx) has two tabs that match the headline. Both are synthetic or drawn from public course data. */
 export const heroSystem = {
+  tabs: { build: "We build", teach: "We teach" },
   name: "support-agent / production",
   systems: [
     { name: "Tickets", icon: "M4 7.5h16v3a2 2 0 0 0 0 3v3H4v-3a2 2 0 0 0 0-3zM14 7.5v9" },
@@ -57,21 +58,38 @@ export const heroSystem = {
     { name: "Policy docs", icon: "M7 3.5h7l4 4v13H7zM14 3.5v4h4M10 12.5h5M10 16h5" },
     { name: "CRM", icon: "M12 11.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM5 20a7 7 0 0 1 14 0" },
   ],
-  agent: { name: "AI agent", line: "Answers from your data, acts in your tools" },
-  controls: [
-    { name: "Evals", note: "Run on every change" },
-    { name: "Guardrails", note: "PII masked" },
-    { name: "Monitoring", note: "Every run traced" },
-    { name: "Human review", note: "For high-risk actions" },
-  ],
-  chips: ["Our FDEs, embedded with your team", "Our FDE trainings"],
-  // One line per system for the interactive hero: what the agent does when that system fires.
+  agent: { name: "AI agent" },
+  // One line per system: what the agent does when that system fires.
   events: [
     "Ticket read, refund policy found, reply drafted",
     "Order status checked, delay explained",
     "Policy clause cited, answer grounded",
     "Account history pulled, tone matched",
   ],
+  controls: [
+    { name: "Evals", note: "Run on every change" },
+    { name: "Guardrails", note: "PII masked" },
+    { name: "Monitoring", note: "Every run traced" },
+    { name: "Human review", note: "For high-risk actions" },
+  ],
+  // Real chapters of Session 1 (course/data/sessions/s1). `at` is the chapter's start in seconds.
+  teach: {
+    name: "claude-code-for-fde / session 1",
+    chapters: [
+      { title: "Welcome, team and course logistics", at: 9 },
+      { title: "Course roadmap and setup checklist", at: 661 },
+      { title: "Claude products and the starter repo", at: 1242 },
+      { title: "Plan-first workflow and the agent harness", at: 2100 },
+      { title: "CLAUDE.md as permanent project memory", at: 3865 },
+      { title: "Live demo: skills build a deck", at: 5064 },
+    ],
+    // Suggested questions from the course; each jumps to the chapter that answers it.
+    questions: [
+      { q: "What is the agent harness in Claude Code?", chapter: 3 },
+      { q: "Why do I need a CLAUDE.md file?", chapter: 4 },
+      { q: "How did the class build a slide deck with a skill?", chapter: 5 },
+    ],
+  },
 };
 
 /** Companies whose latest board listing appears in the home-page role ticker (see roleHighlights.ts). */
