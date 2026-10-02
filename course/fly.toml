@@ -1,0 +1,79 @@
+# Traversaal Academy on Fly.io: one app, one machine, one image (./Dockerfile).
+#
+# First time only. App names are global on Fly: if this one is taken, change
+# `app` below (and PUBLIC_ORIGIN to match).
+#   fly auth login
+#   fly apps create fde-traversaal-academy
+#   python scripts/fly_secrets.py            # see which .env keys will be sent
+#   python scripts/fly_secrets.py --apply    # send them as fly secrets
+#
+# Every deploy: push to main (.github/workflows/deploy.yml runs the same
+# command), or by hand from this folder:
+#   fly deploy --ha=false
+#
+# Where config lives:
+#   [env] below    non-secret settings, visible in git, changed by a commit
+#   fly secrets    anything with a credential in it: the Clerk keys, the GCP
+#                  service account and bucket, the Hamza key. The list is
+#                  scripts/fly_secrets.py's SECRETS.
+# .env itself never enters the image (see .dockerignore).
+app = 'fde-traversaal-academy'
+# Where every other Traversaal app runs, the Hamza bot (digital-twin-hamza)
+# included, so each streamed answer crosses one datacenter, not an ocean.
+primary_region = 'iad'
+
+# Matches the Dockerfile CMD: uvicorn waits up to 25 s for answers in flight,
+# so Fly waits 30 before it stops the machine.
+kill_signal = 'SIGTERM'
+kill_timeout = '30s'
+
+[build]
+  dockerfile = 'Dockerfile'
+
+[deploy]
+  # Start the new machine, wait for its health check, move the traffic, then
+  # stop the old one. No downtime on a deploy even with a single machine, and a
+  # release that can't start (or ships a broken data/*.json) never takes traffic.
+  strategy = 'bluegreen'
+
+[env]
+  # The addresses learners actually use, for Clerk's authorized-parties check.
+  # Set explicitly so the app never has to trust x-forwarded-host, which a
+  # caller controls. Add the custom domain here, comma separated, when one is
+  # pointed at this app.
+  PUBLIC_ORIGIN = 'https://fde-traversaal-academy.fly.dev'
+  HAMZA_API_URL = 'https://claude.traversaal.ai'
+
+[http_service]
+  internal_port = 8080      # the --port in the Dockerfile CMD
+  force_https = true
+  # Always on. The hourly question limit and the caches live in memory; a
+  # stopped machine forgets them, and its next visitor waits for a cold start.
+  auto_stop_machines = 'off'
+  auto_start_machines = true
+  min_machines_running = 1
+
+  # One machine is the design, not a default: auth.py counts each learner's
+  # questions in memory, so two machines would each allow 25 an hour. Before
+  # `fly scale count 2`, move that count to a shared store (fly redis create).
+  [http_service.concurrency]
+    # A bot answer holds its request (and one of Starlette's 40 worker threads)
+    # open for 10-20 s while it streams; pages, assets and API calls are quick.
+    type = 'requests'
+    soft_limit = 50
+    hard_limit = 100
+
+  # /healthz rather than /: the page is a static file and would pass with a
+  # broken catalog, while /healthz loads every session from data/.
+  [[http_service.checks]]
+    method = 'GET'
+    path = '/healthz'
+    grace_period = '15s'
+    interval = '15s'
+    timeout = '10s'
+
+[[vm]]
+  # One Python process and no models: the catalog, transcripts and search
+  # index are a few MB. 512mb leaves room for the Clerk and GCS clients.
+  size = 'shared-cpu-1x'
+  memory = '512mb'

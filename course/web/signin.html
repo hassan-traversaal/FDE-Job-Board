@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign in · Claude Code in Practice</title>
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/academy.css">
+<style>
+  /* ?next=/library is where to go after sign-in; only same-origin paths are honoured. */
+  body { min-height: 100svh; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .side { position: sticky; top: 0; height: 100svh; background: var(--night); color: #fff; overflow: hidden; }
+  .side canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .side::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,17,14,.7), transparent 30%, transparent 55%, rgba(20,17,14,.92)); pointer-events: none; }
+  .side-top { position: absolute; z-index: 2; top: 28px; left: 36px; }
+  .side-copy { position: absolute; z-index: 2; left: 36px; right: 36px; bottom: 40px; max-width: 520px; }
+  .side-copy blockquote { margin: 0; font-family: var(--serif); font-style: italic; font-size: clamp(24px, 2.3vw, 32px); line-height: 1.25; letter-spacing: -.015em; }
+  .side-copy cite { display: flex; align-items: center; gap: 10px; margin-top: 18px; font-style: normal; font-size: 13px; color: rgba(255,255,255,.65); }
+  .side-copy cite img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
+  .side-copy cite .ts { font-family: var(--mono); font-size: 11px; color: var(--coral-hi); margin-left: auto; }
+  .main { display: grid; place-items: center; padding: 48px 24px; }
+  .box { width: min(440px, 100%); }
+  .box .eyebrow { margin-bottom: 14px; }
+  .box h1 { margin: 0; font-family: var(--serif); font-weight: 500; font-size: clamp(34px, 3.6vw, 46px); letter-spacing: -.025em; line-height: 1.05; }
+  .box h1 em { font-style: italic; }
+  .box > p { color: var(--ink-2); margin: 14px 0 26px; }
+  #signin { min-height: 260px; display: flex; justify-content: center; }
+  .note { margin-top: 18px; font-size: 12px; color: var(--muted); }
+  .note a { text-decoration: underline; }
+  .back { position: absolute; top: 24px; right: 28px; font-size: 13px; color: var(--muted); display: inline-flex; gap: 6px; align-items: center; }
+  .back svg { width: 15px; height: 15px; }
+  .back:hover { color: var(--ink); }
+  @media (max-width: 880px) {
+    body { grid-template-columns: 1fr; }
+    .side { position: relative; min-height: 220px; height: 34svh; }
+    .side-copy { display: none; }
+    .main { padding-top: 32px; }
+  }
+</style>
+</head>
+<body>
+<aside class="side" aria-hidden="true">
+  <canvas id="field"></canvas>
+  <div class="side-top" id="brand"></div>
+  <div class="side-copy">
+    <blockquote>“This is the most important file in your ecosystem. It's a permanent memory.”</blockquote>
+    <cite><img src="/assets/img/hamza.jpg" alt=""> Hamza Farooq, on CLAUDE.md <span class="ts">Session 1 · 1:04:25</span></cite>
+  </div>
+</aside>
+
+<main class="main" style="position:relative">
+  <a class="back" href="/"><span id="backIcon"></span> Back</a>
+  <div class="box">
+    <div class="eyebrow">FDE Level 1 · Claude Code in Practice</div>
+    <h1 id="h">Take your seat. <em>Class is free.</em></h1>
+    <p id="hp">One free account opens all five sessions, every chapter, and the bot that answers from the recordings.</p>
+    <div id="signin" aria-live="polite"><div class="auth-wait" style="position:static;background:none"><div class="dots"><i></i><i></i><i></i></div></div></div>
+    <div class="note">Sign in with Google or email. We only use it to keep your place in the library.</div>
+    <div class="more-bar" data-more style="margin-top:22px;font-size:13px"></div>
+  </div>
+</main>
+
+<script src="/assets/js/academy.js"></script>
+<script src="/assets/js/glyphfield.js"></script>
+<script>
+(async () => {
+  const { $ } = Academy;
+  $("#brand").innerHTML = Academy.brand(true);
+  $("#backIcon").outerHTML = Academy.icon.back;
+  const f = new GlyphField($("#field"), { center: [0.56, 0.4], scale: 0.42, streams: false, pointerTarget: document.querySelector(".side") });
+  f.setScene({ rays: 8, seed: 3 }); f.start(); f.bloom(1400);
+
+  const params = new URLSearchParams(location.search);
+  let next = params.get("next") || "/library";
+  if (!/^\/(?!\/)/.test(next)) next = "/library";       // same-origin paths only
+  const cfg = await Academy.authConfig();
+  const el = $("#signin");
+  if (cfg && !cfg.gate) { location.replace(next); return; }
+  if (!cfg || cfg.misconfigured) {
+    el.innerHTML = `<p style="color:var(--ink-2)">Sign-in isn't configured on this server yet. Add the Clerk keys to <code>.env</code>, or set <code>ALLOW_PUBLIC=true</code> for a local demo.</p>`;
+    return;
+  }
+  const c = await Academy.clerk();
+  if (!c) { el.textContent = "Sign-in could not load. Check your connection and refresh."; return; }
+  if (c.isSignedIn) { location.replace(next); return; }
+  el.innerHTML = "";
+  const base = "/signin?next=" + encodeURIComponent(next);
+  const opts = { forceRedirectUrl: next, signUpForceRedirectUrl: next, signInForceRedirectUrl: next,
+                 signInUrl: base + "&mode=in", signUpUrl: base + "&mode=up" };
+  if (params.get("mode") === "in") {
+    $("#h").innerHTML = "Welcome back. <em>Pick up where you left off.</em>";
+    $("#hp").textContent = "Log in and the library remembers the second you stopped at.";
+    c.mountSignIn(el, opts);
+  } else c.mountSignUp(el, opts);
+})();
+</script>
+</body>
+</html>

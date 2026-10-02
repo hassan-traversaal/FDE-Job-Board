@@ -1,0 +1,205 @@
+{
+  "id": "s1",
+  "number": 1,
+  "kicker": "Module 01",
+  "title": "Foundations of Claude Code",
+  "tagline": "Set up Claude Code, write a CLAUDE.md file, and run your first skill.",
+  "summary": "Hamza Farooq explains how Claude Code works as an agent harness (an LLM plus tools, memory, permissions, an agent loop and context management) and why you plan before you execute. The class covers project-level versus personal CLAUDE.md files and skills as repeatable prompts. Students install the VS Code extension live, clone the Claude Code Starter repo, and use the Beautiful HTML skill to build an AI safety deck.",
+  "lead": [
+    "Hamza Farooq"
+  ],
+  "guests": [],
+  "topics": [
+    "Agent harness",
+    "CLAUDE.md",
+    "Skills",
+    "Plan mode",
+    "VS Code setup",
+    "Markdown files"
+  ],
+  "chapters": [
+    {
+      "start": 9,
+      "title": "Welcome, team and course logistics",
+      "summary": "Hamza, Aishwarya and Jayita introduce themselves, then Hamza covers Slack access, cameras, a Slido restaurant icebreaker, recordings and free resources.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 661,
+      "title": "Course roadmap and setup checklist",
+      "summary": "Hamza outlines the four modules and the setup: VS Code or another IDE, the Claude Code extension, and the recommended $100 plan.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 1242,
+      "title": "Claude products and the starter repo",
+      "summary": "Hamza compares Claude Code, Cowork and Claude Design, explains why the team dropped Lovable, and tours the Claude Code Starter GitHub repo.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 2100,
+      "title": "Plan-first workflow and the agent harness",
+      "summary": "Hamza explains why Claude Code is not a chatbot (understand, plan, execute, verify), then breaks down the harness around the LLM.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 2461,
+      "title": "Live demo: setting up Claude Code",
+      "summary": "Murtaza shares a screen while Hamza walks through installing the VS Code extension, starting a session and cloning the starter repo.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 3385,
+      "title": "Three levels and Markdown files",
+      "summary": "Hamza describes three levels of working with Claude Code and why its building blocks are English Markdown files, not code.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 3865,
+      "title": "CLAUDE.md as permanent project memory",
+      "summary": "Hamza explains CLAUDE.md as the anchor against drift, opens the project-level file in VS Code, and prompts Claude for a personal one.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 4369,
+      "title": "Q&A: project vs personal CLAUDE.md",
+      "summary": "Students ask about gitignore, file priority, reusing preferences across projects, and opening several projects in one VS Code window.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 5064,
+      "title": "Live demo: skills build a deck",
+      "summary": "Hamza defines skills as repeatable prompts, then Tarik runs the Beautiful HTML skill to build an AI safety deck.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 6042,
+      "title": "Multi-agent writing pipeline and wrap-up",
+      "summary": "Hamza shows the multi-agent pipeline behind a Substack article, sets the Module 1 assignment, and answers questions, including a misplaced skills folder.",
+      "speaker": "Hamza Farooq"
+    }
+  ],
+  "questions": [
+    {
+      "q": "What is the agent harness in Claude Code?",
+      "answer": "Hamza breaks Claude Code down into a few parts that together make up the harness:\n\n- an LLM in the middle (Anthropic models such as Sonnet, Haiku and Opus)\n- tools, memory and permissions\n- an agent loop that thinks about how to execute the job\n- context management [1]\n\nThe LLM on its own only generates text. The harness connects it to tools built into the product, such as WebFetch or running code, which act on that text [2]. In this picture, CLAUDE.md is the memory file, skills are repeatable prompts, and tools are what gets invoked behind the scenes [3].",
+      "citations": [
+        {
+          "start": 2365,
+          "end": 2424,
+          "speaker": "Hamza Farooq",
+          "quote": "You need to know there is an LLM in the middle. There are two memory and permissions. Then there is an agent loop, then there is context management, which we encompass as everything, as we call it, harness."
+        },
+        {
+          "start": 5615,
+          "end": 5649,
+          "speaker": "Hamza Farooq",
+          "quote": "the job of the LLM is to generate text. Once the text is generated, the LLM is connected to different tools, which is executing the code for you."
+        },
+        {
+          "start": 5678,
+          "end": 5695,
+          "speaker": "Hamza Farooq",
+          "quote": "So, claw.md is your memory file. Your skills are sort of tools, but they are repeatable prompts. And the tools are what's being invoked behind the scenes. This entire thing is called, agent harness."
+        }
+      ]
+    },
+    {
+      "q": "Why do I need a CLAUDE.md file, and what goes in it?",
+      "answer": "Hamza calls CLAUDE.md the most important file in your project: a permanent memory where you explain to Claude what the project is, starting with a project overview. You don't have to write it yourself. You can ask Claude to help, and it will ask you questions about what you're building [1].\n\nThe reason it matters is drift, when an LLM forgets what you asked at the start and produces something different. CLAUDE.md is the anchor that holds the key information about your project [2]. It works as long-term memory that loads as soon as a session starts, and Hamza notes that designing CLAUDE.md files is the first question asked on the certification [3].",
+      "citations": [
+        {
+          "start": 3865,
+          "end": 3922,
+          "speaker": "Hamza Farooq",
+          "quote": "This is the most important file in your ecosystem. It's a permanent memory, … you can ask Claude to help you write it also. You don't have to write it yourself"
+        },
+        {
+          "start": 3940,
+          "end": 3976,
+          "speaker": "Hamza Farooq",
+          "quote": "There's a concept that happens in them which is called drift. … in order for LLMs to prevent them from drifting from what you originally asked, we need to have an anchor."
+        },
+        {
+          "start": 4591,
+          "end": 4611,
+          "speaker": "Hamza Farooq",
+          "quote": "So think of it as the long-term memory that is available to you, and it's loaded as soon as you start. … this is literally the first question that is asked on certification."
+        }
+      ]
+    },
+    {
+      "q": "What's the difference between a project CLAUDE.md and a personal one?",
+      "answer": "Hamza says it depends on where the file lives. A CLAUDE.md in the project root is the definition of the project for everyone who has access to it, while one inside the .claude folder sticks to you and your preferences [1].\n\nPersonal preferences, like a font, color or style you want, go in the personal file, which you can add to .gitignore so it stays local. The global file is the project's shared way of working, for example when a new product manager joins [2]. Claude reads both and decides which matters more from the context you've given. Hamza says yours takes preference over the project one, but you should have both [3].",
+      "citations": [
+        {
+          "start": 4049,
+          "end": 4088,
+          "speaker": "Hamza Farooq",
+          "quote": "it really depends on where you keep your Cloud MD files. If you put your ClaudeMd file in a folder called .claude, within that. What it does is that it only sticks to you and your preferences."
+        },
+        {
+          "start": 4411,
+          "end": 4454,
+          "speaker": "Hamza Farooq",
+          "quote": "The personal cloud.md, you can put it in something what we call is gitignore. … So, globalclaw.md file is for the project. PersonalCloud.md is only assigned to you."
+        },
+        {
+          "start": 4797,
+          "end": 4838,
+          "speaker": "Hamza Farooq",
+          "quote": "See, the one that gets preference is yours more than the project, but it needs to have both of them. … It reads both of them, and it decides on which is more important for you, based on the context you've given."
+        }
+      ]
+    },
+    {
+      "q": "How did the class use a skill to build a slide deck?",
+      "answer": "Tarik shared a screen, and Hamza had Tarik open a new Claude Code session, type a forward slash to list the available skills, and pick Beautiful HTML. The class chose AI safety as the topic, with a deck aimed at product managers building consumer AI tools [1].\n\nWhile it ran, Hamza opened the skill's file in the .claude skills folder to show that a skill is just a structured written prompt with a template library [2]. One slide came out broken, and the fix was to tell Claude in plain English which slide looks wrong. Hamza adds that once you use MCP (next class), Claude can open the browser and check the result itself [3].",
+      "citations": [
+        {
+          "start": 5287,
+          "end": 5318,
+          "speaker": "Hamza Farooq",
+          "quote": "Now you see these are all the different skills that are available to you, so click on… so write, beautiful HTML and press Tab."
+        },
+        {
+          "start": 5424,
+          "end": 5460,
+          "speaker": "Hamza Farooq",
+          "quote": "Here, you have something called skills. Here you have the beautiful HTML. … convert any written content into a polished single-file HTML presentation using templates from beautiful HTML library."
+        },
+        {
+          "start": 5850,
+          "end": 5888,
+          "speaker": "Hamza Farooq",
+          "quote": "you can say, hey, this slide number 6 doesn't look good, can you fix… can you fix that? … when you start using MCP, It will open up the browser itself."
+        }
+      ]
+    },
+    {
+      "q": "Why does Hamza prefer Claude Code over Lovable or ChatGPT?",
+      "answer": "Hamza used to teach Lovable and the team had an enterprise account, but they canceled it because Claude Code makes building \"easier, better, faster, nicer.\" Lovable was also never the tool for full-stack work [1].\n\nThe bigger reason is control. If you ask ChatGPT for a deck, it follows the steps it knows on its own, which Hamza compares to getting the same McDonald's burger every time. A skill file lets you design every aspect of how the output is built [2]. Lovable, Hamza says, builds \"with its own brain\" however much you prompt it, while with Claude Code you control the color, the font and every other piece yourself [3].",
+      "citations": [
+        {
+          "start": 1699,
+          "end": 1738,
+          "speaker": "Hamza Farooq",
+          "quote": "you don't use Lovable for full-stack anyway. … we had a corporate account with them, enterprise account with them, and we basically canceled it with Lovable, because Cloud Code makes it easier, better, faster, nicer."
+        },
+        {
+          "start": 5925,
+          "end": 5965,
+          "speaker": "Hamza Farooq",
+          "quote": "The problem is, it will follow all the steps that it knows on its own. … You can design and control every single aspect of how something is built."
+        },
+        {
+          "start": 5985,
+          "end": 6019,
+          "speaker": "Hamza Farooq",
+          "quote": "you can prompt Lovable as much as you want, but it will build something with its own brain. Here, you're building a website which you can control the color, you can control the font"
+        }
+      ]
+    }
+  ],
+  "cover_chapter": 3
+}

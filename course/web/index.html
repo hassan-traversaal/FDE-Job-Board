@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code in Practice · Traversaal Academy</title>
+<meta name="description" content="Our highest-rated course, open-sourced. Five live sessions with Hamza Farooq and Aishwarya Ashok, free to watch, in chapters, with a bot that answers from the recordings and plays the exact second.">
+<meta property="og:title" content="Claude Code in Practice · free, every session">
+<meta property="og:description" content="Five live sessions, chaptered and searchable to the second.">
+<meta property="og:image" content="/assets/img/course-cover.jpg">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/academy.css">
+<link rel="stylesheet" href="/assets/css/landing.css">
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a href="/" id="brandSlot" aria-label="Traversaal Academy home"></a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#sessions">Sessions</a>
+      <a href="#instructors">Instructors</a>
+      <a href="#ask">The bot</a>
+      <a href="#reviews">Reviews</a>
+    </nav>
+    <span class="spacer"></span>
+    <div class="user-slot" id="userSlot"></div>
+    <a class="btn btn-ghost-dark btn-sm" id="navCta" href="/signin?next=/library">Sign in</a>
+  </div>
+</header>
+
+<main>
+<!-- ───────────── hero: a terminal that blooms into the course ───────────── -->
+<section class="hero" id="top" aria-label="Claude Code in Practice">
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="intro" id="intro" aria-hidden="true">
+    <div><span class="p">~/academy</span> <span class="p">$</span> <span id="introCmd"></span><span class="caret" id="introCaret"></span></div>
+    <div id="introOut" hidden><span class="sp" id="introSpin">✻</span><span id="introMsg"></span></div>
+    <span class="skip">press any key to skip</span>
+  </div>
+
+  <div class="hero-copy">
+    <div class="hero-level in-1">FDE Course <b>Level 1:</b></div>
+    <h1 class="in-2"><span class="l1">Claude Code</span><span class="l2">in practice<span class="dot">.</span></span></h1>
+    <p class="pitch in-3">We open-sourced our <b>highest-rated course</b>. Every live session with Hamza Farooq and Aishwarya Ashok, free to watch, cut into chapters, with a bot that answers from the recordings and plays you the exact second.</p>
+    <a class="hero-rating in-3" id="heroRating" href="#reviews" hidden></a>
+    <div class="ctas in-4">
+      <a class="btn btn-coral" href="/signin?next=/library" data-enter>Enter the library <span id="ctaArrow"></span></a>
+      <a class="btn btn-ghost-dark" href="#sessions">See the five sessions</a>
+    </div>
+    <div class="facts in-5" id="facts"><span>Free</span><span>Five live sessions</span></div>
+  </div>
+
+  <div class="rail-wrap in-5" id="railWrap">
+    <div class="rail-head">
+      <div style="min-width:0" aria-live="polite">
+        <div class="rail-meta" id="railMeta">&nbsp;</div>
+        <div class="rail-label" id="railLabel">&nbsp;</div>
+      </div>
+      <span class="rail-count"><span class="pulse"></span><span id="railCount">loading</span></span>
+    </div>
+    <div class="rail" id="rail" role="tablist" aria-label="Sessions"></div>
+  </div>
+</section>
+
+<!-- ───────────── why it's free ───────────── -->
+<section class="sec" id="open">
+  <div class="wrap">
+    <div class="open-grid">
+      <div class="r">
+        <div class="eyebrow">Why it's free</div>
+        <h2 class="balance">We open-sourced our <em>highest-rated</em> course.</h2>
+        <p class="lede pretty">Claude Code in Practice ran as a live four-week cohort in June 2026. Rather than lock the recordings away, we put every session here: the whole class, split into chapters, and searchable down to the second.</p>
+      </div>
+      <figure class="open-art r" style="margin:0">
+        <!-- The animation from slide 1 of the Module 01 deck; a still frame for reduced motion. -->
+        <picture>
+          <source srcset="/assets/img/robots-still.jpg" media="(prefers-reduced-motion: reduce)">
+          <img src="/assets/img/robots.gif" width="854" height="569" alt="Animation of two robots at a workbench: one points at a grid where the letters AI appear, the other works at the bench">
+        </picture>
+      </figure>
+    </div>
+    <div class="stats r" id="stats">
+      <div class="stat"><b>5</b><span>Live sessions</span></div>
+      <div class="stat"><b>—</b><span>Hours of class</span></div>
+      <div class="stat"><b>—</b><span>Chapters</span></div>
+      <div class="stat"><b>$0</b><span>To watch, ever</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── the people ───────────── -->
+<section class="sec people" id="instructors">
+  <div class="wrap people-grid">
+    <figure class="people-photo r" style="margin:0">
+      <img src="/assets/img/instructors.png" alt="Hamza Farooq and Aishwarya Ashok">
+      <span class="stamp">Cohort 02 · June 2026</span>
+    </figure>
+    <div class="r">
+      <div class="eyebrow">Taught by</div>
+      <h2 class="balance">Two builders, <em>teaching live</em>.</h2>
+      <p class="lede pretty">Real classes with real questions from the room, not a studio recording. You'll hear the tangents, the live demos that broke, and how they got fixed.</p>
+      <div style="margin-top:34px" id="people"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── the bot ───────────── -->
+<section class="sec" id="ask">
+  <div class="wrap ask-grid">
+    <div class="r">
+      <div class="eyebrow">Every session has a bot</div>
+      <h2 class="balance">Ask the class. <em>Land on the second.</em></h2>
+      <p class="lede pretty">Each session's bot has heard the whole recording. It answers in a few lines, cites the moments it used, and one click plays the video from exactly there, with the transcript following along.</p>
+      <p class="lede pretty" style="font-size:14.5px;color:var(--muted)">If you would rather just watch, the chapters are right there too.</p>
+      <div class="try-row">
+        <a class="btn btn-coral" href="/signin?next=%2Flibrary%3Fask" data-enter data-next="/library?ask">Try it yourself <span class="try-arrow"></span></a>
+        <span class="try-note">Ask across all five sessions, free</span>
+      </div>
+    </div>
+    <div class="demo r" id="demo" aria-label="Example answer from Session 1">
+      <div class="demo-top"><span class="pulse"></span><span>Ask <b id="demoTitle">Session 1</b></span><span style="margin-left:auto" class="mono" id="demoDur"></span></div>
+      <div class="demo-body">
+        <div class="demo-q" id="demoQ"></div>
+        <div class="demo-a" id="demoA"></div>
+      </div>
+      <div class="demo-tl">
+        <div class="lbl"><span>0:00</span><span id="demoEnd"></span></div>
+        <div class="tl" id="demoTl"></div>
+        <div class="demo-now" id="demoNow"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── the sessions ───────────── -->
+<section class="sec" id="sessions" style="padding-top:0">
+  <div class="wrap">
+    <div class="r" style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px">
+      <div>
+        <div class="eyebrow">The library</div>
+        <h2 class="balance">Five sessions, <em>start anywhere</em>.</h2>
+      </div>
+      <a class="link-arrow" href="/signin?next=/library" data-enter>Open the library <span id="libArrow"></span></a>
+    </div>
+    <div class="list r" id="list"></div>
+  </div>
+</section>
+
+<!-- ───────────── what the class said (Maven reviews, verbatim) ───────────── -->
+<section class="sec rv" id="reviews" hidden>
+  <div class="wrap">
+    <div class="rv-head r">
+      <div>
+        <div class="eyebrow">From the class · on Maven</div>
+        <h2 class="balance">The people who took it live <em>keep saying the same thing.</em></h2>
+      </div>
+      <a class="rv-score" id="rvScore" href="https://maven.com/boring-bot/claude-code-in-practice#course-reviews" target="_blank" rel="noopener"></a>
+    </div>
+    <div class="rv-feature r" id="rvFeature" role="region" aria-roledescription="carousel" aria-label="Featured reviews"></div>
+  </div>
+  <div class="marquee r" id="rvRows" aria-label="Reviews from Maven"></div>
+  <div class="wrap rv-foot r"><a class="link-arrow" id="rvAll" href="https://maven.com/boring-bot/claude-code-in-practice#course-reviews" target="_blank" rel="noopener">Read every review on Maven</a></div>
+</section>
+
+<section class="close">
+  <div class="spark" aria-hidden="true">✻</div>
+  <h2 class="balance" style="font-family:var(--serif);font-weight:500;letter-spacing:-.025em;line-height:1.02;font-size:clamp(38px,5.4vw,72px);margin:18px auto 0">Pull up a chair. <em>Class is open.</em></h2>
+  <p class="lede pretty" style="margin-top:20px">Make a free account and every session, chapter and moment is yours to watch and search.</p>
+  <a class="btn btn-coral" href="/signin?next=/library" data-enter>Enter the library <span class="arr"></span></a>
+  <div class="fine">Free · no card · sign in with Google or email</div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="more-bar" data-more></div>
+  <div class="foot-in">
+    <a href="/" id="footBrand" aria-label="Traversaal Academy"></a>
+    <span>Answers powered by <a href="https://momentsearch.traversaal.ai" target="_blank" rel="noopener" style="font-weight:600;color:var(--ink)">MomentSearch</a></span>
+    <span>© 2026 Traversaal.ai</span>
+  </div>
+</footer>
+
+<div class="peek" id="peek" aria-hidden="true"><img alt=""></div>
+
+<script src="/assets/js/academy.js"></script>
+<script src="/assets/js/glyphfield.js"></script>
+<script src="/assets/js/landing.js"></script>
+</body>
+</html>

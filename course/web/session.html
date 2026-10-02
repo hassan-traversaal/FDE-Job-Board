@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session · Claude Code in Practice</title>
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/academy.css">
+<link rel="stylesheet" href="/assets/css/ask.css">
+<link rel="stylesheet" href="/assets/css/session.css">
+</head>
+<body class="app view-ov">
+<div class="auth-wait"><div class="dots"><i></i><i></i><i></i></div></div>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a href="/" id="brand" aria-label="Traversaal Academy home"></a>
+    <nav class="crumb" aria-label="Breadcrumb">
+      <span class="sep"></span><a href="/library">Library</a><span aria-hidden="true">/</span>
+      <a href="#" class="here" id="crumbSession">Session</a>
+      <span class="w-only" aria-hidden="true">/</span><span class="here w-only">Watching</span>
+    </nav>
+    <span class="spacer"></span>
+    <div class="user-slot" id="userSlot"></div>
+  </div>
+</header>
+
+<!-- Two views on one page:
+     overview  what the session covers and its chapters, with Get started
+     watch     the player (chapters rail, which opens and closes) + the bot
+     The bot sits on the right in both. ?watch / ?t= opens straight into watch. -->
+<main class="ws">
+  <section class="ov" id="ov" aria-label="Session overview"></section>
+
+  <aside class="rail" id="rail" aria-label="Chapters and transcript">
+    <div class="rail-tabs" role="tablist" aria-label="Session views">
+      <button class="tab" role="tab" id="tab-ch" aria-controls="panel-ch" aria-selected="true">Chapters <span class="c" id="chCount"></span></button>
+      <button class="tab" role="tab" id="tab-tx" aria-controls="panel-tx" aria-selected="false">Transcript <span class="c" id="txCount"></span></button>
+      <button class="tab only-mobile" role="tab" id="tab-ask" aria-controls="ask" aria-selected="false">Ask</button>
+      <button class="rail-close" id="railClose" type="button" aria-label="Hide chapters" title="Hide chapters"></button>
+    </div>
+    <div class="panel" id="panel-ch" role="tabpanel" aria-labelledby="tab-ch"><div class="rprog" id="railProg"></div><ol class="chapters" id="chapters"></ol></div>
+    <div class="panel panel-tx" id="panel-tx" role="tabpanel" aria-labelledby="tab-tx" hidden>
+      <div class="tx-tools">
+        <input id="txFind" type="search" placeholder="Find in the transcript" autocomplete="off" aria-label="Find in the transcript">
+        <label title="Keep the current line in view"><input type="checkbox" id="txFollow" checked> Follow</label>
+      </div>
+      <div class="tx-hits" id="txHits"></div>
+      <div class="tx" id="tx"></div>
+    </div>
+  </aside>
+
+  <section class="center" aria-label="Player">
+    <div class="center-in">
+      <section class="player" id="player" aria-label="Session player">
+        <div class="screen" id="screen">
+          <img class="still" id="still" alt="" hidden>
+          <div class="badge" id="badge" hidden></div>
+          <div class="flash" id="flash" aria-live="polite"></div>
+          <button class="big" id="big" type="button" aria-label="Play"></button>
+          <div class="cap" id="cap" aria-hidden="true"></div>
+          <div class="endcard" id="endcard" hidden role="dialog" aria-label="Chapter finished">
+            <div>
+              <div class="ec-k" id="ecK"></div>
+              <div class="ec-t" id="ecT"></div>
+              <div class="ec-sub" id="ecSub"></div>
+              <div class="ec-b">
+                <button class="btn btn-coral btn-sm" id="ecNext" type="button">Next chapter</button>
+                <button class="btn btn-ghost-dark btn-sm" id="ecAgain" type="button">Watch again</button>
+                <a class="btn btn-coral btn-sm" id="ecSession" href="/library" hidden>Next session</a>
+                <a class="btn btn-ghost-dark btn-sm" id="ecLib" href="/library" hidden>Back to the library</a>
+              </div>
+              <label class="ec-auto"><input type="checkbox" class="switch" id="ecAuto"> Play chapters back to back</label>
+            </div>
+          </div>
+        </div>
+        <div class="controls">
+          <div class="scrub" id="scrub" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0">
+            <div class="segs" id="segs"></div>
+            <div class="pins" id="pins"></div>
+            <div class="knob" id="knob"></div>
+            <div class="hover-card" id="hoverCard"><div class="img"><img alt=""></div><div class="t"></div></div>
+          </div>
+          <div class="ctrl-row">
+            <button class="cbtn" id="prevCh" type="button" aria-label="Previous chapter"></button>
+            <button class="cbtn" id="playBtn" type="button" aria-label="Play"></button>
+            <button class="cbtn" id="nextCh" type="button" aria-label="Next chapter"></button>
+            <span class="time"><b id="tNow">0:00</b> / <span id="tDur">0:00</span></span>
+            <span class="spacer"></span>
+            <button class="cbtn txt" id="rateBtn" type="button" aria-label="Playback speed">1×</button>
+            <button class="cbtn on" id="ccBtn" type="button" aria-label="Captions" aria-pressed="true"></button>
+            <button class="cbtn" id="fsBtn" type="button" aria-label="Full screen"></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Always under the video, top to bottom: the chapter's full name, the
+           way to the previous/next chapter, who leads it, then its summary.
+           Updated the moment a new chapter starts. Nothing here truncates. -->
+      <section class="chbar" id="chbar" aria-live="polite" aria-label="Current chapter">
+        <div class="ci-top">
+          <div class="ci-k"><span class="pulse"></span><span id="cbK"></span></div>
+          <span class="ci-tools">
+            <label class="cb-auto" title="Keep playing into the next chapter instead of stopping"><input type="checkbox" class="switch" id="autoToggle"> Autoplay</label>
+            <button class="cb-toggle" id="railToggle" type="button" aria-controls="rail" aria-pressed="true" title="Show or hide the chapter list"><span id="railIcon"></span><span>Chapters</span></button>
+          </span>
+        </div>
+        <h2 class="ci-t" id="cbT"></h2>
+        <div class="ci-nav">
+          <button class="cb-btn" id="cbPrev" type="button" aria-label="Previous chapter"><span id="cbPrevIcon"></span>Previous</button>
+          <button class="cb-next" id="cbNext" type="button"><small id="cbNextK">Next chapter</small><span id="cbNextT"></span></button>
+          <label class="done-box ci-done"><input type="checkbox" id="doneToggle"><span>Mark as done</span></label>
+        </div>
+        <div class="ci-meta"><div class="ci-who" id="cbWho"></div><div class="ci-prog" id="ciProg"></div></div>
+        <div class="ci-sum">
+          <div class="ci-lbl">About this chapter</div>
+          <p id="cbS"></p>
+        </div>
+      </section>
+      <div class="more-bar ws-more" data-more></div>
+    </div>
+  </section>
+
+  <aside class="ask" id="ask" aria-label="Ask this session" data-mobile-hidden="true">
+    <div class="ask-head">
+      <div class="row1"><span class="pulse"></span><h2 id="askTitle">Ask this session</h2><button class="clear" id="clear" type="button" hidden>Clear</button></div>
+      <div class="sub" id="askSub">Answers cite the exact moment.</div>
+    </div>
+    <div class="log" id="log" aria-live="polite"></div>
+    <form class="ask-box" id="askForm">
+      <label class="sr-only" for="q">Ask a question about this session</label>
+      <div class="ask-field">
+        <textarea id="q" rows="1" placeholder="Ask about anything taught in this session"></textarea>
+        <button class="send" id="send" type="submit" aria-label="Ask" disabled></button>
+      </div>
+      <div class="ask-note"><span>Preview answers, drawn from the transcript</span><span><kbd>/</kbd> to ask</span></div>
+    </form>
+  </aside>
+</main>
+
+<script src="/assets/js/academy.js"></script>
+<script src="/assets/js/session.js"></script>
+</body>
+</html>

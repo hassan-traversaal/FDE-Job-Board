@@ -1,0 +1,206 @@
+{
+  "id": "s2",
+  "number": 2,
+  "kicker": "Module 02",
+  "title": "From skills to subagents",
+  "tagline": "Tell a skill from a subagent and define a subagent's six key fields.",
+  "summary": "Aishwarya recaps where CLAUDE.md, skills and docs live (user, project and team level), then introduces subagents as the second tier of automation, using a teacher and student agents analogy to show why each subagent gets its own context window. Hamza builds a CLAUDE.md from an empty folder and runs the SEO writer subagent system live on a student's topic, producing a researched article for about $0.60. The session ends with the six fields of a subagent file and how a subagent differs from a skill and from an agent team.",
+  "lead": [
+    "Aishwarya Ashok",
+    "Hamza Farooq"
+  ],
+  "guests": [],
+  "topics": [
+    "Subagents",
+    "Skills",
+    "CLAUDE.md scope",
+    "Context windows",
+    "Task decomposition",
+    "Agent teams"
+  ],
+  "chapters": [
+    {
+      "start": 16,
+      "title": "Module 2 goals and the certification",
+      "summary": "Aishwarya sets the agenda (a skills recap, then subagents) and explains how the course will cover Claude Certified Architect exam topics.",
+      "speaker": "Aishwarya Ashok"
+    },
+    {
+      "start": 603,
+      "title": "Where CLAUDE.md, skills and docs live",
+      "summary": "Aishwarya recaps the docs folder for PRDs and design docs, and how CLAUDE.md and skills work at user, project and team level.",
+      "speaker": "Aishwarya Ashok"
+    },
+    {
+      "start": 1189,
+      "title": "Live demo: CLAUDE.md from scratch",
+      "summary": "Hamza opens an empty PM Coach folder, has Claude draft a CLAUDE.md, then asks for Brave MCP search to research interview prep.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 1712,
+      "title": "Q&A: skill scope and folder access",
+      "summary": "Shashank and Tarik ask where user-level skills live, how to leave the starter repo, and whether Claude Code sees other folders.",
+      "speaker": "Aishwarya Ashok"
+    },
+    {
+      "start": 2228,
+      "title": "Three tiers of automation",
+      "summary": "Aishwarya ranks skills, subagents and agent teams as three automation tiers, and asks whether the workers need to talk to each other.",
+      "speaker": "Aishwarya Ashok"
+    },
+    {
+      "start": 2803,
+      "title": "Live demo: starting the SEO writer",
+      "summary": "Hamza shows an SEO writer article, takes Tarik's topic on AI for non-technical founders in the EU, and starts a live run.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 3200,
+      "title": "Teacher agent and student agents",
+      "summary": "Aishwarya explains why splitting work across subagents keeps each context clean, then students ask how this differs from teams and skills.",
+      "speaker": "Aishwarya Ashok"
+    },
+    {
+      "start": 4325,
+      "title": "Live demo: the finished SEO article",
+      "summary": "Hamza reviews the run's cost and article, then after breakout rooms sets a hand-drawn subagent assignment and shows a decomposition visual.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 5005,
+      "title": "Six fields of a subagent file",
+      "summary": "Aishwarya walks through name, description, model, tools, memory and skills, using the starter repo's code reviewer agent as the example.",
+      "speaker": "Aishwarya Ashok"
+    },
+    {
+      "start": 5850,
+      "title": "Skill vs subagent, freelancer vs team",
+      "summary": "Aishwarya contrasts skills and subagents by context window, Hamza compares a freelancer to a full team, and Justin asks about subagent memory.",
+      "speaker": "Aishwarya Ashok"
+    }
+  ],
+  "questions": [
+    {
+      "q": "What's the actual difference between a skill and a subagent?",
+      "answer": "Aishwarya's short version: a skill is one repeatable task with one prompt, while a subagent takes one delegated piece of a bigger task that has been split into subtasks [1]. A subagent can call a skill, but only when its piece of the work needs one [2].\n\nThe bigger practical difference is the context window. A skill runs inside your main chat, so every turn fills that chat up. A subagent runs independently with a fresh context, and the main agent just collects its output, \"almost like a postmaster\" [3]. On top of that, a subagent can set its own model, tools and memory.",
+      "citations": [
+        {
+          "start": 6048,
+          "end": 6069,
+          "speaker": "Aishwarya Ashok",
+          "quote": "for a skill. one repeatable task, one prompt, super prompt, being able to complete as one task, one skill, versus a sub-agent, think of it as any sort of a task that can be delegated"
+        },
+        {
+          "start": 5676,
+          "end": 5693,
+          "speaker": "Aishwarya Ashok",
+          "quote": "Skill, It's used for a task. Sub-agent is used for one of the decompositions of a main task into multiple subtasks, and the subagent can also call a skill…"
+        },
+        {
+          "start": 5943,
+          "end": 5973,
+          "speaker": "Aishwarya Ashok",
+          "quote": "Calls that sub-agent and makes it run independently, which means your main charts context window is not being used… the main agent's only job is to, almost like a postmaster, collect the output"
+        }
+      ]
+    },
+    {
+      "q": "What do I put in a subagent's markdown file?",
+      "answer": "Aishwarya walks through six fields, the first two being the same front matter a skill has [1]:\n\n- **name** and **description**. The main agent reads the description to decide which subagent gets a task, so make it specific.\n- **model**. The subagent runs on this model rather than the main chat's, so research can use Opus while a summarizer uses Haiku [2].\n- **tools**, such as web search or Brave MCP for research, or Read and Grep for a reviewer.\n- **memory**, a file the subagent adds to on each run.\n- **skills**, an optional pointer to an existing skill.\n\nNone of the six is mandatory [3]. The starter repo's code reviewer agent shows the format.",
+      "citations": [
+        {
+          "start": 5007,
+          "end": 5032,
+          "speaker": "Aishwarya Ashok",
+          "quote": "which is the name and the description, what we call as the front matter for the skill file, right? That part remains, so, for summation, there are, like, six important sections."
+        },
+        {
+          "start": 5137,
+          "end": 5163,
+          "speaker": "Aishwarya Ashok",
+          "quote": "the research sub-agent can actually run on one of the most frontier models, like Opus… The summarizer can run on Haiko, because you don't need, like, a super powerful model"
+        },
+        {
+          "start": 5476,
+          "end": 5507,
+          "speaker": "Aishwarya Ashok",
+          "quote": "So the six fields that you see here. are actually what that matters the most, but it is not a mandatory that your sub-agent should always have all of these things."
+        }
+      ]
+    },
+    {
+      "q": "What happened in the live SEO writer demo, and what did the run cost?",
+      "answer": "Hamza took a topic from the chat (Tarik's question on how AI changes the startup ecosystem), reframed it for a non-technical founder entering the EU market, and hit run. The SEO writer is a system of subagents, including research, editorial and evaluation agents [1], and Hamza left it alone while it worked [2].\n\nWhen the class came back to it, the run had taken 7 steps, cost about $0.60 and generated 34,000 tokens [3]. The article, on AI tools for non-technical founders entering the EU market, included images and an example that Hamza says it found without being prompted. Aishwarya used the run to show how one request splits into research, an outline, writing, images and a humanizing check.",
+      "citations": [
+        {
+          "start": 2859,
+          "end": 2877,
+          "speaker": "Hamza Farooq",
+          "quote": "And there is a whole agent… sub-agent ecosystem. This is… that we run, you know, there's a research agent, there's an editorial agent, so-and-so things that run, there's an evaluation agent that runs."
+        },
+        {
+          "start": 3185,
+          "end": 3200,
+          "speaker": "Hamza Farooq",
+          "quote": "I just wanted you guys to see that it started running, and I will not change anything in it. I will not do anything to it myself. I will let the whole Agent ecosystem run it fun."
+        },
+        {
+          "start": 4341,
+          "end": 4380,
+          "speaker": "Hamza Farooq",
+          "quote": "it took about 9 steps to run, 7 steps, and it chose to run on 7 steps… the entire article took 0.6 cents, or sorry.6 dollars to write. The total number of tokens that we generated is 34,000."
+        }
+      ]
+    },
+    {
+      "q": "How do I decide between subagents and an agent team?",
+      "answer": "Aishwarya boils it down to one question: do the tasks need to talk to each other, or can they run on their own and combine at the end [1]? If they can run independently, subagents fit. Agent teams, covered in the next module, are for work where agents talk to each other as they go.\n\nShashank asked whether passing research on to a writer makes it a team. Aishwarya's answer was no: the output moves sequentially, but no agent talks to another mid-way [2].\n\nHamza's analogy is that a subagent is one freelancer, while an agent team is hiring a full team [3]. Aishwarya adds that you hand a freelancer the job and wait for a summary, while a team keeps building on each other's input.",
+      "citations": [
+        {
+          "start": 2737,
+          "end": 2762,
+          "speaker": "Aishwarya Ashok",
+          "quote": "Do every task actually talk to each other, or can these tasks actually run independently and just come together at the end to combine all the output into one?"
+        },
+        {
+          "start": 3924,
+          "end": 3954,
+          "speaker": "Aishwarya Ashok",
+          "quote": "it's not about the output being dependent, it's about the two agents being able to talk to each other… the output is being passed sequentially as steps, but that does not mean that one agent is actually having to talk…"
+        },
+        {
+          "start": 6185,
+          "end": 6201,
+          "speaker": "Hamza Farooq",
+          "quote": "There's a difference between agent team and sub-agent. Sub-agents can just be independent. You can have one freelancer. But agent is actually hiring a full team."
+        }
+      ]
+    },
+    {
+      "q": "What's the difference between a user-level and a project-level CLAUDE.md?",
+      "answer": "Aishwarya explains that CLAUDE.md works at more than one level [1]. A user-level CLAUDE.md sits in the .claude folder of your user profile, describes you, and carries over to every project you create. A project-level CLAUDE.md describes one project, which can be your own pet project or a GitHub repo your whole team shares [2]. The two can coexist, and Aishwarya notes this scoping is one of the trickiest areas in the certification exam.\n\nSkills follow the same split. Hamza's beautiful HTML skill lives in his user folder, so it works in any project. To promote a project skill, ask Claude to register it as a slash command and it moves to the user level [3].",
+      "citations": [
+        {
+          "start": 815,
+          "end": 848,
+          "speaker": "Aishwarya Ashok",
+          "quote": "cloud.md is acting at multiple levels… there can exist a .clot folder and a clot.md file, which can have definitions of the user that is you, and that automatically gets carried over to different projects"
+        },
+        {
+          "start": 848,
+          "end": 876,
+          "speaker": "Aishwarya Ashok",
+          "quote": "there is also a project-level Claw.md that you can create, which carries a definition of that specific project… or it can also be the GitHub repo that your entire team is using"
+        },
+        {
+          "start": 1769,
+          "end": 1787,
+          "speaker": "Aishwarya Ashok",
+          "quote": "turn the skill into a slash command, and that automatically puts that skill into the user-level, elevation already. So all you have to do is just ask Claude to say, register the skill into a slash command."
+        }
+      ]
+    }
+  ],
+  "cover_chapter": 5
+}

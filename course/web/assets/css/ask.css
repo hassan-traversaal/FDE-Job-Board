@@ -1,0 +1,90 @@
+/* The chat: shared by a session's bot (session.html) and the course-wide bot
+   on the library page (library.html). Layout of the panel itself lives with
+   each page; everything inside a conversation lives here. */
+
+/* ================= the bot ================= */
+.ask-head { padding: 14px 18px 12px; border-bottom: 1px solid var(--line); flex: none; }
+.ask-head .row1 { display: flex; align-items: center; gap: 10px; }
+.ask-head h2 { margin: 0; font-size: 15px; font-weight: 600; letter-spacing: -.01em; }
+.ask-head .sub { margin-top: 3px; font-size: 12.5px; color: var(--muted); }
+.ask-head .clear { margin-left: auto; appearance: none; border: 0; background: none; color: var(--muted); font-size: 12px; cursor: pointer; padding: 4px 6px; border-radius: 6px; }
+.ask-head .clear:hover { color: var(--ink); background: rgba(26, 22, 18, .05); }
+.log { position: relative; flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; padding: 18px; scroll-behavior: smooth; overscroll-behavior: contain; }
+.empty h3 { margin: 6px 0 0; font-family: var(--serif); font-weight: 500; font-size: 24px; letter-spacing: -.02em; line-height: 1.15; }
+.empty h3 em { font-style: italic; }
+.empty p { margin: 10px 0 18px; color: var(--ink-2); font-size: 13.5px; }
+.empty .lbl { font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.qcard { appearance: none; display: flex; gap: 10px; align-items: flex-start; width: 100%; text-align: left; border: 1px solid var(--line-2); background: var(--paper); border-radius: 12px; padding: 10px 12px; font-size: 13px; line-height: 1.45; color: var(--ink); cursor: pointer; margin-bottom: 7px; transition: border-color .15s ease, background-color .15s ease, transform .25s var(--e); }
+.qcard:hover { border-color: var(--coral); background: #fff; transform: translateX(2px); }
+.qcard .ar { color: var(--coral-aa); flex: none; margin-top: 1px; }
+.qcard .ar svg { width: 14px; height: 14px; }
+
+.turn { margin-bottom: 24px; }
+.you { margin-left: auto; width: fit-content; max-width: 88%; background: var(--ink); color: var(--paper); padding: 9px 13px; border-radius: 16px 16px 4px 16px; font-size: 13.5px; line-height: 1.45; }
+.trace { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 10px; }
+.trace span { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; padding: 4px 9px; border-radius: 999px; border: 1px solid var(--line-2); color: var(--muted); transition: all .25s ease; }
+.trace span::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--line-2); }
+.trace span.run { border-color: var(--coral-line); color: var(--coral-deep); }
+.trace span.run::before { background: var(--coral); animation: dot 1s var(--e-io) infinite; }
+.trace span.done { color: var(--ok); border-color: #CFE8D6; }
+.trace span.done::before { background: var(--ok); }
+.trace.folded span:not(.keep) { display: none; }
+.ans { font-size: 14px; line-height: 1.68; color: #2b2620; }
+.ans p { margin: 0 0 10px; }
+.ans ul { margin: 4px 0 10px; padding: 0; list-style: none; }
+.ans li { position: relative; padding-left: 16px; margin: 6px 0; }
+.ans li::before { content: ""; position: absolute; left: 3px; top: .72em; width: 5px; height: 5px; border-radius: 50%; background: var(--coral); }
+.ans b { color: var(--ink); }
+.ans code { font-family: var(--mono); font-size: .86em; background: var(--paper-2); padding: 1px 5px; border-radius: 4px; }
+.ans .muted { color: var(--muted); }
+.ans .err { color: #B83F12; }
+.moments { margin-top: 12px; display: grid; gap: 8px; }
+.moments .lbl { font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.mo { appearance: none; display: grid; grid-template-columns: 100px minmax(0, 1fr); gap: 11px; width: 100%; text-align: left; border: 1px solid var(--line); background: var(--paper); border-radius: 12px; padding: 8px; cursor: pointer; transition: border-color .15s ease, background-color .15s ease; }
+.mo:hover, .mo.on { border-color: var(--coral); background: #fff; }
+.mo .im { position: relative; aspect-ratio: 16 / 9; border-radius: 7px; overflow: hidden; background: var(--paper-3); }
+.mo .im img { width: 100%; height: 100%; object-fit: cover; }
+.mo .im .ts { position: absolute; left: 5px; bottom: 5px; font-family: var(--mono); font-size: 10.5px; color: #fff; background: rgba(14, 12, 10, .78); padding: 2px 5px; border-radius: 4px; }
+.mo .who { display: flex; gap: 6px; align-items: center; font-size: 11.5px; color: var(--muted); }
+.mo .who .pct { margin-left: auto; font-family: var(--mono); font-size: 10.5px; font-weight: 500; }
+.pct.hi { color: var(--ok); } .pct.mid { color: #8A6D1A; } .pct.lo { color: var(--muted); }
+.mo .say { margin-top: 3px; font-size: 12.5px; line-height: 1.45; color: var(--ink); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.mo .chn { display: block; margin-top: 3px; font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mo .say, .mo .who { min-width: 0; }
+
+.ask-box { padding: 12px 14px 14px; border-top: 1px solid var(--line); background: #FCFBF8; flex: none; }
+.ask-field { display: flex; align-items: flex-end; gap: 8px; border: 1px solid var(--line-2); background: #fff; border-radius: 14px; padding: 6px 6px 6px 12px; transition: border-color .15s ease, box-shadow .15s ease; }
+.ask-field:focus-within { border-color: var(--coral); box-shadow: 0 0 0 4px rgba(239, 95, 43, .12); }
+.ask-field textarea { flex: 1; min-width: 0; border: 0; outline: none; resize: none; font: inherit; font-size: 14px; line-height: 1.5; padding: 6px 0; max-height: 140px; background: transparent; color: var(--ink); }
+.ask-field textarea::placeholder { color: var(--faint); }
+.send { appearance: none; border: 0; width: 34px; height: 34px; border-radius: 10px; background: var(--coral-aa); color: #fff; display: grid; place-items: center; cursor: pointer; flex: none; transition: background-color .15s ease, opacity .15s ease; }
+.send svg { width: 16px; height: 16px; }
+.send:hover { background: #A82F19; }
+.send:disabled { opacity: .4; cursor: default; }
+.ask-note { margin-top: 8px; font-size: 11px; color: var(--muted); display: flex; justify-content: space-between; gap: 10px; }
+.ask-note kbd { font-family: var(--mono); font-size: 10.5px; border: 1px solid var(--line-2); border-bottom-width: 2px; border-radius: 4px; padding: 0 4px; background: #fff; }
+
+/* ================= the live bot's answers ================= */
+.ans .md-h { margin: 2px 0 10px; font-family: var(--serif); font-weight: 500; font-size: 18px; line-height: 1.25; letter-spacing: -.012em; color: var(--ink); }
+.ans .md-k { margin: 16px 0 8px; font-family: var(--mono); font-size: 10.5px; font-weight: 400; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.ans ol { margin: 4px 0 10px; padding-left: 20px; }
+.ans ol li { margin: 5px 0; }
+.ans blockquote { margin: 8px 0 12px; padding: 2px 0 2px 12px; border-left: 2px solid var(--coral-line); color: var(--ink-2); font-style: italic; }
+.ans p > i:only-child { color: var(--ink-2); }
+.md-rows { display: grid; gap: 6px; margin: 4px 0 12px; }
+.md-row { padding: 9px 11px; border-radius: 10px; background: var(--paper); border: 1px solid var(--line); font-size: 13.5px; line-height: 1.55; }
+.md-row b { display: block; font-size: 12px; font-weight: 600; color: var(--coral-deep); margin-bottom: 2px; }
+.md-row span + span { margin-left: 4px; }
+.md-row .src { display: block; margin: 6px 0 0 !important; line-height: 1.9; }
+.md-rows, .md-row { min-width: 0; }
+.md-row { overflow-wrap: anywhere; }
+.md-more { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 10px; }
+.md-more > summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--coral-aa); }
+.md-more > summary::-webkit-details-marker { display: none; }
+.md-more > summary::before { content: "+"; font-family: var(--mono); font-weight: 500; }
+.md-more[open] > summary::before { content: "−"; }
+.md-more[open] > summary { margin-bottom: 8px; }
+.ans-note { margin: 0 0 10px; font-size: 12.5px; color: var(--muted); }
+
+.ans, .moments, .turn { min-width: 0; }
+.ans { overflow-wrap: anywhere; }

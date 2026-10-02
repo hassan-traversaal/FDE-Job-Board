@@ -1,0 +1,215 @@
+{
+  "id": "s3",
+  "number": 3,
+  "kicker": "Module 03",
+  "title": "Multi-agent systems and agent teams",
+  "tagline": "Decide whether your agents need to talk, then choose subagents or an agent team.",
+  "summary": "Aishwarya recaps subagents through office-hours questions, a three-question quiz and a student's observability system, then contrasts sequential and parallel subagent shapes. Most of the session is on agent teams: a feature-build demo where UI, frontend, backend and QA teammates message each other, followed by the shared task list, the experimental settings flag, display modes and token cost. It closes with a first look at dynamic workflows and how hooks add determinism.",
+  "lead": [
+    "Aishwarya Ashok"
+  ],
+  "guests": [],
+  "topics": [
+    "Subagent patterns",
+    "Agent teams",
+    "Shared task list",
+    "Peer messaging",
+    "Token cost",
+    "Dynamic workflows"
+  ],
+  "chapters": [
+    {
+      "start": 13,
+      "title": "Midpoint check-in and today's plan",
+      "summary": "Aishwarya maps where the cohort stands, previews agent teams and dynamic workflows, and Amina explains the capstone project sheet.",
+      "speaker": "Aishwarya Ashok",
+      "slide": 7
+    },
+    {
+      "start": 617,
+      "title": "Subagent questions and a recap quiz",
+      "summary": "Aishwarya works through office-hours questions on precedence, auto-invocation and memory, then runs a three-question quiz on common subagent mistakes.",
+      "speaker": "Aishwarya Ashok",
+      "slide": 10
+    },
+    {
+      "start": 2020,
+      "title": "Sequential and parallel subagent shapes",
+      "summary": "Murtaza shows an observability fan-out system; Aishwarya explains why synthesis routes through the main agent and contrasts sequential and parallel shapes.",
+      "speaker": "Aishwarya Ashok",
+      "slide": 22
+    },
+    {
+      "start": 2903,
+      "title": "When agents need to talk",
+      "summary": "Aishwarya frames agent teams as subagents that talk, using a feature launch where one backend change breaks frontend and tests.",
+      "speaker": "Aishwarya Ashok",
+      "slide": 26
+    },
+    {
+      "start": 3284,
+      "title": "Live demo: a feature-building team",
+      "summary": "A project lead spawns UI, frontend, backend and QA teammates that message each other about an auth change mid-build.",
+      "speaker": "Aishwarya Ashok",
+      "slide": 42
+    },
+    {
+      "start": 3556,
+      "title": "Q&A: coordination, guardrails and cost",
+      "summary": "Learners ask who talks to whom, how state is tracked and what stops runaway loops, and Aishwarya weighs the token cost.",
+      "speaker": "Aishwarya Ashok",
+      "slide": 32
+    },
+    {
+      "start": 4322,
+      "title": "Team anatomy and a breakout debate",
+      "summary": "Aishwarya lays out the lead, teammates and shared task list, then learners debate skill, subagent or team for four scenarios.",
+      "speaker": "Aishwarya Ashok",
+      "slide": 28
+    },
+    {
+      "start": 5304,
+      "title": "Enabling, viewing and calling teammates",
+      "summary": "Aishwarya covers the settings flag, in-process and split-pane views, prompts that spawn specific teammates, and the task lifecycle.",
+      "speaker": "Aishwarya Ashok",
+      "slide": 37
+    },
+    {
+      "start": 6599,
+      "title": "Dynamic workflows and choosing a pattern",
+      "summary": "Aishwarya previews dynamic workflows for open-ended work like codebase migrations, then gives three questions for choosing subagents, agent teams or workflows.",
+      "speaker": "Aishwarya Ashok",
+      "slide": 48
+    },
+    {
+      "start": 6901,
+      "title": "Q&A: hooks, then capstone next steps",
+      "summary": "Aishwarya explains hooks as if-then rules that add determinism, using /goal as an example, then covers the capstone project and evals class.",
+      "speaker": "Aishwarya Ashok",
+      "slide": 39
+    }
+  ],
+  "questions": [
+    {
+      "q": "What makes an agent team different from a group of subagents?",
+      "answer": "With subagents, workers never talk to each other; every message goes through the main agent. Aishwarya describes an agent team as \"sub-agents plus talking\": the same isolated workers, now able to message each other directly [1]. Two extra pieces make that possible [2]:\n\n- a **shared task list**, so every teammate sees the work and is accountable for it\n- a **message board** for peer-to-peer communication\n\nEach teammate still has its own context window and is spawned by the main agent. Reporting back changes too. Instead of waiting on each worker's result, the lead checks whether all teammates are idle and every task on the shared list is complete, then reports back to you [3].",
+      "citations": [
+        {
+          "start": 3008,
+          "end": 3024,
+          "speaker": "Aishwarya Ashok",
+          "quote": "think of it as sub-agents plus talking. Sub-agents plus the ability for the sub-agents to talk to each other is literally what agent teams is all about."
+        },
+        {
+          "start": 3727,
+          "end": 3752,
+          "speaker": "Aishwarya Ashok",
+          "quote": "Only thing that makes this agent team different from the sub-agent is that the agent team also operates with two things. One is, it's a shared task list … So they have a message board."
+        },
+        {
+          "start": 4699,
+          "end": 4718,
+          "speaker": "Aishwarya Ashok",
+          "quote": "the main agent checks if all the teammates are idle, or stop working. If that's the case, it then checks the shared task list. If every task has been completed, then it automatically complies that the work has been done"
+        }
+      ]
+    },
+    {
+      "q": "How do I turn on agent teams in Claude Code, and can I still use normal subagents afterwards?",
+      "answer": "Agent teams are experimental, so they sit behind a setting. Aishwarya explains that you set the experimental agent teams parameter (`CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`) to 1 in the project's settings.json, and the easiest route is to ask Claude Code to set it up for you [1]. Turning it on does not replace anything: skills and subagents keep working, and you can still ask Claude to run one subagent on its own [2]. When you want the team, use team wording such as \"spawn teammates\". You can be specific about who joins, for example only the backend and QA teammates for a task, or describe the task and let the lead build the shared task list and pick the teammates [3].",
+      "citations": [
+        {
+          "start": 4392,
+          "end": 4410,
+          "speaker": "Aishwarya Ashok",
+          "quote": "there is a param for it, which is Claude Code Experimental Agent Team. … That needs to be set up in your settings.json. You do not have to worry, just talk to Claude Code to say, I would like to set up"
+        },
+        {
+          "start": 5389,
+          "end": 5412,
+          "speaker": "Aishwarya Ashok",
+          "quote": "You could use it both, yes, yes, we just have to specify … activating this does not mean that you cannot use anything else. You can still continue to run a skill, you can still continue to run a sub-agent."
+        },
+        {
+          "start": 5720,
+          "end": 5736,
+          "speaker": "Aishwarya Ashok",
+          "quote": "At some time, I would want just the backend and QA to work with each other. I do not maybe want the front-end to automatically get picked up. I can verbally tell my agent to say, spawn only backend and QA for this task."
+        }
+      ]
+    },
+    {
+      "q": "In the agent team demo, what did the teammates actually say to each other?",
+      "answer": "Aishwarya's demo ships a task manager feature. A project lead agent spawns UI designer, frontend, backend and QA teammates, with a tech lead agent that pulls the work together [1]. Mid-build, the backend switches its auth format and messages the frontend directly to update its header before its work goes stale, and the frontend replies that it has updated to the same shape [2]. The backend then tells QA that both sides are aligned so the tests are not blocked, and the results merge into the tech lead as a reconciled project. The point Aishwarya stresses: no teammate goes back to the project lead to report that someone else is stale, because each one knows where the others are [3].",
+      "citations": [
+        {
+          "start": 3168,
+          "end": 3198,
+          "speaker": "Aishwarya Ashok",
+          "quote": "So we have a UI designer sub-agent, we have a front-end dev sub-agent, we have a back-end dev, and we have a QA … And then we also have a tech lead agent that basically, like, combines everything together"
+        },
+        {
+          "start": 3409,
+          "end": 3426,
+          "speaker": "Aishwarya Ashok",
+          "quote": "heads up, I switched this, so you need to update that header, otherwise you're going to be stale. The front end is talking to the back end to say, okay, I have updated the same shape"
+        },
+        {
+          "start": 3453,
+          "end": 3469,
+          "speaker": "Aishwarya Ashok",
+          "quote": "Nowhere in the process is it going back to the project lead to say, hey, project lead, I'm done with my job, but looks like the other one is still stale."
+        }
+      ]
+    },
+    {
+      "q": "When is an agent team worth the extra token cost compared to plain subagents?",
+      "answer": "Aishwarya's rule of thumb is to start with subagents. If you already know exactly what output you need and each step hands off cleanly, as in the writing system, an agent team is overkill [1]. Teams are token-intensive because teammates keep messaging each other, so they pay off when a decision has nuance and you want two or three agents working it out together, as when backend, frontend and tests depend on each other [2]. In Aishwarya's estimate, orchestrated subagents cover about 80 to 85 percent of cases, and teams fit the enterprise or production-heavy cases that need peer-to-peer communication [3]. Plan the team before running it, since planning costs far fewer tokens than a team run.",
+      "citations": [
+        {
+          "start": 4053,
+          "end": 4072,
+          "speaker": "Aishwarya Ashok",
+          "quote": "For example, for the writer subagent, an agent team is an overkill, because I exactly know what I need to get as output at the end of the day with the sub-agents that I run for the writing system"
+        },
+        {
+          "start": 4136,
+          "end": 4158,
+          "speaker": "Aishwarya Ashok",
+          "quote": "an Asian team actually is a little token-intensive, and it is a little bit of, let's say, cost-intensive when it comes to running … problems where there is a nuance in decision"
+        },
+        {
+          "start": 4277,
+          "end": 4297,
+          "speaker": "Aishwarya Ashok",
+          "quote": "80% of the cases, 80-85% of the cases, multiple sub-agents orchestration is the best bet that most of us land up with. Only in enterprise cases, or only in certain nuanced cases"
+        }
+      ]
+    },
+    {
+      "q": "Why does my subagent ignore constraints I already discussed with Claude in the main chat?",
+      "answer": "Each time a subagent is invoked it starts with a fresh memory, in its own isolated run [1]. It only knows what the main agent passes to it, so constraints you discussed at length in the main chat never reach it on their own. That was the answer to the third recap quiz question: it is your job to tell the main agent to carry what you discussed into the subagent's prompt [2]. If the constraint is needed every time, make it part of the system, either in CLAUDE.md or in a memory file you create for that subagent [3]. Aishwarya also suggests having a subagent save its results to a memory file when you want later runs to build on earlier ones.",
+      "citations": [
+        {
+          "start": 1168,
+          "end": 1196,
+          "speaker": "Aishwarya Ashok",
+          "quote": "Yes, so whenever you invoke a sub-agent, it starts with a fresh memory. … every time you run that subagent, have it save its results to a memory file."
+        },
+        {
+          "start": 1907,
+          "end": 1931,
+          "speaker": "Aishwarya Ashok",
+          "quote": "let's say when you're calling a sub-agent, despite of the fact that you must have discussed something in a chat. It is your responsibility to tell the main agent that whatever we charted right now"
+        },
+        {
+          "start": 1931,
+          "end": 1957,
+          "speaker": "Aishwarya Ashok",
+          "quote": "this is a product constraint, and it is needed every time I run the subagent, then it's a part of cloud.md, or the memory file that you create for the sub-agent."
+        }
+      ]
+    }
+  ],
+  "cover_chapter": 6
+}

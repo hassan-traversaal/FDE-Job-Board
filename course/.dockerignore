@@ -1,0 +1,14 @@
+# An allowlist: the build context is ONLY what the app reads at runtime.
+# Anything new in this folder stays out of the image until it is listed here,
+# so a recording dropped in media/ (gigabytes) or a .env with live keys can
+# never ship by accident, and `fly deploy` never uploads them to the builder.
+*
+!app.py
+!requirements.txt
+!backend
+!data
+!web
+
+# ...minus the bytecode Python leaves inside them.
+**/__pycache__
+**/*.pyc

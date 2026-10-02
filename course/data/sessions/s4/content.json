@@ -1,0 +1,205 @@
+{
+  "id": "s4",
+  "number": 4,
+  "kicker": "Module 04",
+  "title": "Evals and deployment",
+  "tagline": "Write ground truth and rubrics for your agents, then deploy to Vercel or Fly.io.",
+  "summary": "Hamza Farooq makes the case for evaluation-first building, using the ARIA e-commerce agent to define success, add guardrails and an observability layer, and set exact-match ground truth for skills and rubrics for subagents. The second half covers deployment: converting markdown agents into SDK code with Claude Code, choosing Vercel or Fly.io, and MeetingMemo as a project to build and ship.",
+  "lead": [
+    "Hamza Farooq"
+  ],
+  "guests": [],
+  "topics": [
+    "Evals",
+    "Guardrails",
+    "Observability",
+    "Rubrics",
+    "Agent SDKs",
+    "Deployment"
+  ],
+  "chapters": [
+    {
+      "start": 7,
+      "title": "Developer track and certification offers",
+      "summary": "Hamza announces a free full-stack developer track, help enrolling for the Claude Code certification exam, and the July 11 demo day.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 1321,
+      "title": "Defining success for the ARIA agent",
+      "summary": "Hamza shows the ARIA e-commerce agent and the class lists success measures: resolved requests, turns, NPS, human handoff, edge cases.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 1937,
+      "title": "Guardrails, authentication and Llama Guard",
+      "summary": "Hamza covers authentication, role-based access and three guardrails (prompt injection, unsafe input, topical alignment), with Meta's Llama Guard as an example.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 2582,
+      "title": "Observability, traces and golden datasets",
+      "summary": "Hamza explains observability as the logging layer that enables evals, recommends open-source tools like Arize, reads a trace, and introduces golden datasets.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 3357,
+      "title": "Evaluating skills against ground truth",
+      "summary": "Hamza shows how to test skills against a golden output, using the Vantage legal tool's five ground-truth documents as an example.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 4100,
+      "title": "Rubrics for evaluating subagents",
+      "summary": "Hamza moves from LLM as a judge to subagent rubrics: scope adherence, source citation, uncertainty flagging and format compliance.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 4547,
+      "title": "Q&A: subagent evals and eval loop",
+      "summary": "Students ask about judging subagent context, human checkpoints, alert cadence and code review; Hamza closes with the 10-example eval loop.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 5814,
+      "title": "From markdown agents to SDK code",
+      "summary": "Hamza explains that markdown agents need a harness in production, so Claude Code converts them into Python SDK code.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 6446,
+      "title": "Choosing Vercel, Fly.io or Railway",
+      "summary": "Hamza compares Vercel for front ends with Fly.io for Python AI backends, then covers API billing and local models.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 6959,
+      "title": "MeetingMemo, dogfooding and distribution",
+      "summary": "Hamza offers MeetingMemo as a ready-made project to build and deploy, argues for dogfooding, and names distribution as the real moat.",
+      "speaker": "Hamza Farooq"
+    }
+  ],
+  "questions": [
+    {
+      "q": "How would you evaluate a customer-facing agent like ARIA?",
+      "answer": "Hamza starts with product outcomes: did ARIA resolve what the customer was asking for, and how many turns of back-and-forth did it take [1]? The class adds NPS, how often it escalates to a human, and edge cases such as products the store doesn't carry. Hamza then groups the evaluation into three kinds [2]:\n\n- **Product-based**: does the system meet your requirements?\n- **System**: does login work, and does it remember the user correctly?\n- **Guardrails**: is it protected against prompt injection, unsafe input and off-topic requests?\n\nThose three guardrails are, in Hamza's words, the cornerstone of anything you put into production [3].",
+      "citations": [
+        {
+          "start": 1703,
+          "end": 1748,
+          "speaker": "Hamza Farooq",
+          "quote": "did I resolve what the customer was looking for? Did I successfully resolve customer request? … How many turns did it take to answer the question?"
+        },
+        {
+          "start": 2259,
+          "end": 2291,
+          "speaker": "Hamza Farooq",
+          "quote": "Number one is product-based evaluation. … is it able to log in and remember me correctly? … And number 3 is that does it have enough guardrails built in?"
+        },
+        {
+          "start": 2110,
+          "end": 2136,
+          "speaker": "Hamza Farooq",
+          "quote": "Their first line of defense is, We prevent from prompt injection. … We prevent from unsafe input. … And we do topical alignment. … These three things are the cornerstone when you build something in production."
+        }
+      ]
+    },
+    {
+      "q": "What's the difference between observability and evals, and do I need both?",
+      "answer": "Hamza keeps them separate. Observability is the logging layer: it records the input, the processing and the output at every step, so you can see what happened. Evals are what you build on top of it. If you want to know whether a request was resolved or how many turns it took, you need observability first [1]. Hamza also contrasts it with guardrails: a guardrail is a building block inside the product, while observability is horizontal and connects to every component [2]. For tools, the advice is to start with Arize or Patronus AI and pick whichever is open source, so you can host it yourself and keep PII data local [3]. You don't have to wire it up by hand; you can ask Claude Code to find and add an open-source observability layer.",
+      "citations": [
+        {
+          "start": 2658,
+          "end": 2685,
+          "speaker": "Hamza Farooq",
+          "quote": "I want to know how many iterations or turns it took, right? You need to have observability in the first place to make it possible for you to even achieve that. … So, observability enables evaluations."
+        },
+        {
+          "start": 2786,
+          "end": 2809,
+          "speaker": "Hamza Farooq",
+          "quote": "So, think of… Guardrail as an intrinsic part of the ecosystem. … And observability as a horizontal product that is connected to every single component in the product building."
+        },
+        {
+          "start": 3033,
+          "end": 3070,
+          "speaker": "Hamza Farooq",
+          "quote": "I would suggest you either use Arise or Petronas AI. … Start with whoever is open sourced. … you can even deploy this on your own ecosystem, so PII data, data security … Everything is locally hosted."
+        }
+      ]
+    },
+    {
+      "q": "How do I write evals for a skill versus a subagent?",
+      "answer": "Hamza splits them by how predictable the output is. Skills are close to deterministic, so they get exact-match ground truth: given this input, the output must match a specific format or value. Subagents have many valid paths, so they get a rubric instead [1]. For a skill, you can either add an eval task inside the skill's own prompt, or build a separate skill that tests it every time against the golden output and task criteria you wrote [2]. For subagents, Hamza usually recommends a separate evaluator agent that checks each layer: did it stay in scope, give citations, flag uncertainty and follow the format [3]. In both cases, you are the one who owns the golden output.",
+      "citations": [
+        {
+          "start": 3955,
+          "end": 3982,
+          "speaker": "Hamza Farooq",
+          "quote": "There is a deterministic output, which is an exact match. … Skills usually fall here. … Rubric-based, which is, the output is evaluated against defined dimensions … sub-agents exist over here."
+        },
+        {
+          "start": 3525,
+          "end": 3555,
+          "speaker": "Hamza Farooq",
+          "quote": "you can add an eval task to the skill itself. … Or what you can do is you can actually build a separate skill. … Which tests your skills every single time, given. … The golden output and task criteria…"
+        },
+        {
+          "start": 4330,
+          "end": 4351,
+          "speaker": "Hamza Farooq",
+          "quote": "Most often I recommend people to build a separate agent which is evaluating the outcome of every layer … did you stick to the scope? Did you give me citations? Did you answer the uncertainty?"
+        }
+      ]
+    },
+    {
+      "q": "When should a human step into the eval process for a multi-agent build?",
+      "answer": "From day one. Hamza's view is that human judgment is a building block, not a final review step [1]. With a cooking analogy (if the meat is cut badly, the finished dish probably won't be good either), Hamza argues for evaluating at every step: start with humans, then automate toward the end [2]. For a large subagent team where you can't watch every agent, the suggestion is to add an evaluation layer to every agent's markdown file, asking each one to report how well it did at every step and storing that score [3]. Deciding which dimensions matter, such as tone, is where a PM's user empathy comes in.",
+      "citations": [
+        {
+          "start": 4923,
+          "end": 4940,
+          "speaker": "Hamza Farooq",
+          "quote": "You need to have human touch from day one, and … It's a part of your building block."
+        },
+        {
+          "start": 4944,
+          "end": 4981,
+          "speaker": "Hamza Farooq",
+          "quote": "So, if somebody is cutting… Meat incorrectly … You start human evaluation at every step of the way. … You basically start with human and then you automate it towards the end."
+        },
+        {
+          "start": 5054,
+          "end": 5084,
+          "speaker": "Hamza Farooq",
+          "quote": "I would like you to add this layer to every markdown file. … give me your evaluation on how well you did at every step. … And store that."
+        }
+      ]
+    },
+    {
+      "q": "How do I deploy an AI app I built with Claude Code?",
+      "answer": "First check whether the app has an LLM in it. Skills and agent markdown files don't run on their own: Claude Code is the harness that runs them, and it isn't there in production, so they have to become Python code built on an SDK [1]. You can ask Claude Code to do that conversion, but Hamza says to be specific, for example a full-stack product with the Anthropic Python SDK for the AI backend, Node.js for the backend and React for the frontend [2]. For hosting, a front end with no real processing goes on Vercel, and a Python AI backend goes on Fly.io [3]. If there's no LLM in the middle, you can skip the SDK step and deploy straight to Vercel.",
+      "citations": [
+        {
+          "start": 5934,
+          "end": 5961,
+          "speaker": "Hamza Farooq",
+          "quote": "So, in production, you don't have an agent harness. … You don't have Claude Code running in production, right? … you have to convert this into a Python code. … And that is what we call an SDK, Software Development Kit."
+        },
+        {
+          "start": 6162,
+          "end": 6181,
+          "speaker": "Hamza Farooq",
+          "quote": "I would like you to deploy it as a full-stack product … Anthropic Python SDK for AI backend, Node.js as the backend overall. … And, React as a frontend."
+        },
+        {
+          "start": 6452,
+          "end": 6472,
+          "speaker": "Hamza Farooq",
+          "quote": "if you have something which is just a front-end which does not have any processing, really any processing, you use Vercel. … You use fly.io if you have some kind of Python ecosystem that is running as an AI backend."
+        }
+      ]
+    }
+  ],
+  "cover_chapter": 5
+}

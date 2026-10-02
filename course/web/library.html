@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session library · Claude Code in Practice</title>
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/academy.css">
+<link rel="stylesheet" href="/assets/css/ask.css">
+<link rel="stylesheet" href="/assets/css/library.css">
+</head>
+<body>
+<div class="auth-wait"><div class="dots"><i></i><i></i><i></i></div></div>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a href="/" id="brand" aria-label="Traversaal Academy home"></a>
+    <div class="crumb"><span class="sep"></span><span class="here">Library</span></div>
+    <span class="spacer"></span>
+    <div class="user-slot" id="userSlot"></div>
+  </div>
+</header>
+
+<main>
+  <section class="lib-head">
+    <div class="in">
+      <div>
+        <div class="eyebrow">Claude Code in Practice · Cohort 02</div>
+        <h1 class="balance">The library. <em>Start anywhere.</em></h1>
+        <div class="sub" id="sub"></div>
+        <div class="lib-prog" id="libProg"></div>
+      </div>
+      <div id="resumeSlot"></div>
+    </div>
+  </section>
+
+  <section class="shelf" aria-label="Sessions">
+    <div class="in cg-wrap"><div id="congrats"></div></div>
+    <div class="in" id="shelf">
+      <div class="sess"><div class="shimmer" style="height:60px"></div><div><div class="shimmer" style="height:28px;width:60%"></div><div class="shimmer" style="height:16px;width:80%;margin-top:14px"></div><div class="shimmer" style="height:30px;margin-top:28px"></div></div><div class="shimmer" style="aspect-ratio:16/10"></div></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="more-bar" data-more></div>
+  <div class="foot-in">
+    <span id="footBrand"></span>
+    <span>Answers powered by <a href="https://momentsearch.traversaal.ai" target="_blank" rel="noopener" style="font-weight:600;color:var(--ink)">MomentSearch</a></span>
+    <span>© 2026 Traversaal.ai</span>
+  </div>
+</footer>
+
+<!-- The one way into the course-wide bot (assets/js/askcourse.js). -->
+<button class="ask-fab" id="askFab" type="button" aria-controls="cdrawer" aria-expanded="false" aria-label="Ask the course, across all sessions">Ask the course</button>
+
+<div class="cdrawer" id="cdrawer" hidden role="dialog" aria-modal="true" aria-labelledby="cdT">
+  <div class="cd-scrim"></div>
+  <aside class="cd-panel">
+    <div class="ask-head">
+      <div class="row1"><span class="pulse"></span><h2 id="cdT">Ask the course</h2>
+        <span class="cd-actions"><button class="clear" id="cdClear" type="button" hidden>Clear</button>
+        <button class="cd-x" type="button" aria-label="Close">×</button></span></div>
+      <div class="sub" id="cdSub"></div>
+      <div class="cd-scope" id="cdScope" role="group" aria-label="Which sessions to ask"></div>
+    </div>
+    <!-- A cited moment plays here, so asking never means leaving the library. -->
+    <section class="cd-player" id="cdPlayer" hidden aria-label="Moment player"><div class="cdp-wrap">
+      <div class="cdp-screen"><video id="cdVideo" playsinline controls controlslist="nodownload" preload="metadata"></video></div>
+      <div class="cdp-meta">
+        <div class="cdp-row"><span class="cdp-k" id="cdpK"></span><a class="cdp-open" id="cdpOpen" href="/library">Open in the session →</a><button class="cdp-x" id="cdpX" type="button" aria-label="Close the player">×</button></div>
+        <p class="cdp-q" id="cdpQ"></p>
+      </div>
+    </div></section>
+    <div class="log" id="cdLog" aria-live="polite"></div>
+    <form class="ask-box" id="cdForm">
+      <label class="sr-only" for="cdq">Ask a question</label>
+      <div class="ask-field">
+        <textarea id="cdq" rows="1" placeholder="Ask anything across the course"></textarea>
+        <button class="send" id="cdSend" type="submit" aria-label="Ask" disabled></button>
+      </div>
+      <div class="ask-note"><span>Answers by MomentSearch · moments play right here</span><span><kbd>Esc</kbd> to close</span></div>
+    </form>
+  </aside>
+</div>
+
+<script src="/assets/js/academy.js"></script>
+<script src="/assets/js/askcourse.js"></script>
+<script>
+(async () => {
+  const { $, $$, esc, fmt, dur, date, icon, store } = Academy;
+  $("#brand").innerHTML = Academy.brand(false);
+  $("#footBrand").innerHTML = Academy.brand(false);
+  Academy.topbarScroll();
+
+  await Academy.guard();
+  const syncing = Academy.syncProgress();               // the account's progress, merged in
+  Academy.mountUser($("#userSlot"));
+  let data;
+  try { data = await Academy.api("/api/sessions"); }
+  catch (e) { Academy.revealAuth(); $("#shelf").innerHTML = `<p style="padding:40px 0;color:var(--muted)">The library could not load. Refresh to try again.</p>`; return; }
+  Academy.revealAuth();
+
+  const S = data.sessions, people = data.course.instructors || [];
+  const face = name => (people.find(p => p.name === name) || {}).photo;
+  const total = S.reduce((a, s) => a + s.duration_ms, 0);
+  const nCh = S.reduce((a, s) => a + s.chapters.length, 0);
+  $("#sub").innerHTML = [`${S.length} sessions`, `${dur(total)} of class`, `${nCh} chapters`, "every one free"].map(t => `<span>${esc(t)}</span>`).join("");
+
+  await syncing;
+  const prog = sid => store.get("progress:" + sid, null);
+
+  /* The whole course, as a percentage of its chapters; at 100%, a note to say well done. */
+  const cp = Academy.courseProgress(S), full = cp.pct === 100;
+  $("#libProg").innerHTML = `
+    <div class="lp-row"><span class="lp-k">${full ? "Course complete" : "Your progress"}</span><b class="${full ? "full" : ""}">${cp.pct}%</b></div>
+    <div class="pbar${full ? " full" : ""}"><i style="width:${cp.pct}%"></i></div>
+    <div class="lp-sub">${cp.done ? `${cp.done} of ${cp.total} chapters done · ${cp.sessionsDone} of ${cp.sessions} sessions complete` : `Mark chapters as done as you go, and your progress shows here.`}</div>`;
+  if (full) {
+    $("#congrats").innerHTML = `<div class="cg-inline">${Academy.congratsHTML({ sessions: S.length, chapters: nCh, duration: total }, true)}</div>`;
+    if (!store.get("congrats-seen", false)) { Academy.burst($("#congrats .cg-inline")); store.set("congrats-seen", true); }
+  } else store.set("congrats-seen", false);
+
+  /* Pick up where you left off: the most recently watched session. */
+  const recent = S.map(s => ({ s, p: prog(s.id) })).filter(x => x.p && x.p.t > 5000).sort((a, b) => b.p.at - a.p.at)[0];
+  if (recent) {
+    const { s, p } = recent;
+    const ch = s.chapters.find(c => p.t >= c.start_ms && p.t < c.end_ms) || s.chapters[0] || {};
+    const thumb = `/assets/frames/${s.id}/t/${String(Math.round(p.t / 60000)).padStart(4, "0")}.jpg`;
+    $("#resumeSlot").innerHTML = `
+      <a class="resume" href="/session/${s.number}?t=${Math.floor(p.t / 1000)}">
+        <img src="${esc(thumb)}" alt="" onerror="this.src='${esc(ch.thumb || s.cover || "")}'">
+        <div style="min-width:0">
+          <div class="k">Pick up at ${fmt(p.t)}</div>
+          <div class="t">${esc(s.title)}</div>
+          <div class="c">${esc(ch.title || "")}</div>
+          <div class="bar"><i style="width:${Math.min(100, (p.t / s.duration_ms) * 100).toFixed(1)}%"></i></div>
+        </div>
+      </a>`;
+  }
+
+  $("#shelf").innerHTML = S.map(s => {
+    const p = prog(s.id) || {};
+    const seen = p.ch || {}, marks = p.done || {};
+    const doneOf = c => (c.n in marks ? !!marks[c.n] : (seen[c.n] || 0) >= 0.95);
+    const nDone = s.chapters.filter(doneOf).length, sp = Academy.sessionProgress(s).pct;
+    const href = `/session/${s.number}`;
+    const leads = s.lead || [];
+    return `
+    <article class="sess${s.bonus ? " bonus" : ""} r" data-id="${s.id}">
+      <div class="num" aria-hidden="true">${s.bonus ? "+" : String(s.number).padStart(2, "0")}</div>
+      <div style="min-width:0">
+        <div class="kick"><b>${esc(s.kicker)}</b><span>${esc(date(s.date))}</span><span>${dur(s.duration_ms)}</span><span>${s.chapters.length} chapters</span>${sp === 100 ? `<span class="done-tag">✓ Completed</span>` : sp ? `<span class="pct-tag">${sp}% done</span>` : ""}</div>
+        <h2><a href="${href}">${esc(s.title)}</a></h2>
+        <p class="tagline pretty">${esc(s.tagline)}</p>
+        <div class="who">
+          <span class="faces">${leads.map(n => face(n) ? `<img src="/${esc(face(n))}" alt="">` : "").join("")}<span>${esc(leads.join(" & "))}</span></span>
+          <span class="topics">${(s.topics || []).slice(0, 4).map(t => `<span class="tag">${esc(t)}</span>`).join("")}</span>
+        </div>
+        <div class="strip">
+          <div class="strip-bar" role="list" aria-label="Chapters of ${esc(s.title)}">
+            ${s.chapters.map(c => `<a role="listitem" href="${href}?t=${Math.floor(c.start_ms / 1000)}" style="flex-grow:${((c.end_ms - c.start_ms) / s.duration_ms * 100).toFixed(2)};--w:${doneOf(c) ? 100 : Math.round((seen[c.n] || 0) * 100)}%"
+               data-label="${esc(c.title)}" data-t="${fmt(c.start_ms)}" data-n="${c.n}" aria-label="Chapter ${c.n}: ${esc(c.title)}, at ${fmt(c.start_ms)}"></a>`).join("")}
+          </div>
+          <div class="strip-meta"><span class="now">Chapters · hover to read, click to jump</span><span>${nDone ? `${sp}% · ${nDone}/${s.chapters.length} done · ` : ""}${fmt(s.duration_ms)}</span></div>
+        </div>
+      </div>
+      <a class="cover" href="${href}" aria-label="Open ${esc(s.title)}">
+        ${s.cover ? `<img src="${esc(s.cover)}" alt="" loading="lazy">` : ""}
+        ${s.media || s.has_video ? "" : `<span class="audio">Audio · slides</span>`}
+        <span class="len">${fmt(s.duration_ms)}</span>
+        <span class="play">${icon.play} ${p.t > 5000 ? "Resume" : "Watch"}</span>
+        ${p.t ? `<span class="scrub"><i style="width:${Math.min(100, p.t / s.duration_ms * 100).toFixed(1)}%"></i></span>` : ""}
+      </a>
+    </article>`;
+  }).join("");
+
+  Academy.courseBot(S);
+
+  /* Hovering the strip names the chapter under the pointer. */
+  $$(".sess").forEach(row => {
+    const now = row.querySelector(".strip-meta .now"), idle = now.innerHTML;
+    row.querySelectorAll(".strip-bar a").forEach(a => {
+      const show = () => (now.innerHTML = `<b>${a.dataset.t}</b> · ${esc(a.dataset.n)}. ${esc(a.dataset.label)}`);
+      a.addEventListener("pointerenter", show); a.addEventListener("focus", show);
+    });
+    row.querySelector(".strip-bar").addEventListener("pointerleave", () => (now.innerHTML = idle));
+  });
+  Academy.reveal();
+})();
+</script>
+</body>
+</html>

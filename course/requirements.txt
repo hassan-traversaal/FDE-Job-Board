@@ -1,0 +1,9 @@
+# Traversaal Academy: one list for the whole app.
+# Pinned to the versions it runs with locally, so a deploy builds exactly what
+# was tested. Bump them here, on purpose.
+fastapi==0.142.2
+uvicorn[standard]==0.54.0
+clerk-backend-api==7.0.0
+google-cloud-storage==3.15.1   # the recordings (signed URLs into the hamza bucket)
+httpx==0.28.1                  # the live bot (backend/hamza.py)
+certifi>=2026.7.22             # hamza.py's CA bundle; a floor, so it stays current

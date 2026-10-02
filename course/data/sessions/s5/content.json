@@ -1,0 +1,199 @@
+{
+  "id": "s5",
+  "number": 5,
+  "kicker": "Bonus session",
+  "title": "Preparing for the CCAF exam",
+  "tagline": "Know the five CCAF exam domains, how questions are framed, and how to prepare.",
+  "summary": "Hamza Farooq explains what the Claude Code Architect certification (CCAF) involves: who can sit it right now, the four free Anthropic Skilljar courses to finish first, and the five domains behind its 60 multiple-choice questions. Each domain gets a sample scenario question (duplicate charges after retries, tool misrouting, CLAUDE.md hierarchy, prompt injection, progressive summarization), alongside the Agent Architectures explainer from single skill to production agent. Hamza then demos a 5-minute quiz and a 55-question practice exam before taking attendee questions.",
+  "lead": [
+    "Hamza Farooq"
+  ],
+  "guests": [],
+  "topics": [
+    "CCAF exam",
+    "Exam domains",
+    "Agent architectures",
+    "CLAUDE.md hierarchy",
+    "Context management",
+    "Study plan"
+  ],
+  "chapters": [
+    {
+      "start": 9,
+      "title": "Welcome and free resources",
+      "summary": "Hamza introduces the session and Traversaal.ai, asks for restaurant tips, and points to a free Claude Code book and open-source course.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 373,
+      "title": "Who can get certified now",
+      "summary": "Why Hamza rates this certification, the paused partner track, and the four free Anthropic Skilljar courses to take while you wait.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 980,
+      "title": "Five domains and agent architectures",
+      "summary": "Hamza lists the five exam domains, then walks through skill, subagent and orchestrator levels plus a retry double-charge question.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 1402,
+      "title": "Tool design and MCP scoping",
+      "summary": "Domain two covers tool choice, MCP scoping and structured errors, with misrouting fixed by clarifying the tool description first.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 1509,
+      "title": "CLAUDE.md hierarchy and team setup",
+      "summary": "Hamza recalls 8 or 9 questions on where CLAUDE.md sits (user, project, directory), shown through a new-developer scenario.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 1765,
+      "title": "Prompt engineering and study method",
+      "summary": "Domain four (few-shot, batching, tool use schemas) gets a prompt injection question, then Hamza explains answering before reading the options.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 2209,
+      "title": "Context management and distractor answers",
+      "summary": "Domain five covers the summarization trap, a separate layer for numeric details, common distractor answers, and a recap of key rules.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 2609,
+      "title": "Live demo: practice quiz and exam",
+      "summary": "After recapping Skilljar sign-up, Hamza runs the 5-minute quiz with the chat, tours the 55-question practice exam, and shares GitHub repos.",
+      "speaker": "Hamza Farooq"
+    },
+    {
+      "start": 3152,
+      "title": "Q&A: eligibility, format and fit",
+      "summary": "Attendees ask about eligibility, exam format, PM versus developer fit, system design depth, other LLMs, and Hamza's free-first teaching model.",
+      "speaker": "Hamza Farooq"
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the CCAF exam cover, and what is the format?",
+      "answer": "The exam pulls from five domains [1]:\n\n- agentic architecture and orchestration\n- tool design and MCP integration\n- Claude Code configuration and workflows\n- prompt engineering and structured output\n- context management and reliability\n\nHamza warns the questions are genuinely hard. As a data scientist rather than a full-stack developer, Hamza found CI/CD the toughest area [2]. Every question is multiple choice, 60 questions in 90 minutes as best Hamza recalls, and you do not need a Claude Code subscription to take the exam, only to use Claude Code itself [3].",
+      "citations": [
+        {
+          "start": 980,
+          "end": 1013,
+          "speaker": "Hamza Farooq",
+          "quote": "there are 5 domains that they will test you on. They'll test you on agentic architecture and orchestration. Then they'll test you on tool design and MCP integration. … context management and reliability."
+        },
+        {
+          "start": 1026,
+          "end": 1051,
+          "speaker": "Hamza Farooq",
+          "quote": "for me, the toughest part was CICD, because I'm more of a data scientist, I'm less of a full-stack developer."
+        },
+        {
+          "start": 3351,
+          "end": 3374,
+          "speaker": "Hamza Farooq",
+          "quote": "you don't need Cloud Code subscription to take the exam. … all the questions are MCQ-style, 60 MCQ-style questions in 90 minutes, I think."
+        }
+      ]
+    },
+    {
+      "q": "Can I take the certification if my company isn't an Anthropic partner, and where should I start?",
+      "answer": "Not yet, according to Hamza. Access runs through Anthropic's partner network, and the partner track and its interest form were paused at the time, with Hamza expecting individual registration to open in two to three weeks. If your company already works with Anthropic, your customer success contact can connect you [1].\n\nWhile you wait, the courses are open to everyone:\n\n- Sign up at anthropic.skilljar, register for the four courses in the learning path, and complete them in order [2].\n- If you take only one, Hamza recommends Building with the Claude API, which took Hamza at least two hours and is still a regular reference [3].\n\nHamza says there are no real prerequisites beyond VS Code and GitHub.",
+      "citations": [
+        {
+          "start": 509,
+          "end": 550,
+          "speaker": "Hamza Farooq",
+          "quote": "your customer success agent, whoever is working with you, they can definitely connect you to the right people. … It's currently paused … But they are going to open it, I think, in 2-3 weeks"
+        },
+        {
+          "start": 2621,
+          "end": 2649,
+          "speaker": "Hamza Farooq",
+          "quote": "How to sign up, basically, is anthropic.skilljar. … Register for the four courses, which I've told you in the CPN Learning Path. complete them in order"
+        },
+        {
+          "start": 633,
+          "end": 662,
+          "speaker": "Hamza Farooq",
+          "quote": "the one that I really recommend on a daily, daily basis is building what's called Cloud API. It's an amazing course. This is the one that I think I spent about at least 2 hours just on this one."
+        }
+      ]
+    },
+    {
+      "q": "How do a skill, a subagent, an orchestrator and a production agent differ?",
+      "answer": "Hamza uses the Agent Architectures explainer to show how deep the exam goes on agentic design. Each level builds on the last:\n\n- **Single skill:** the starting point.\n- **Subagent:** the work splits across a planner agent, a formatter and a research agent, with a human in the loop [1].\n- **Orchestrator:** starts the process, sends information to individual agents, and a tech lead synthesizes what comes back [2].\n- **Production agent:** a support agent with a pre-tool hook and a post-tool hook around its tools [3].\n\nHamza also stresses that subagents are stateless, so the full context has to be passed in the prompt [3]. Anthropic's course content covers each level.",
+      "citations": [
+        {
+          "start": 1184,
+          "end": 1200,
+          "speaker": "Hamza Farooq",
+          "quote": "you start with a skill, then there is sub-agent, where there is a human in the loop … there is a planner agent, there's a formatter, and there's a research agent."
+        },
+        {
+          "start": 1231,
+          "end": 1250,
+          "speaker": "Hamza Farooq",
+          "quote": "So the orchestrator's job over here is basically, to sort of start with the process, and then send information to other pieces, to other individual agents, and then there is a tech lead … who's synthesizing everything"
+        },
+        {
+          "start": 2549,
+          "end": 2594,
+          "speaker": "Hamza Farooq",
+          "quote": "Sub-agents are stateless … they always pass the full context in the prompt … this is what a production agent looks like. You have a support agent … there's a pre-tool hook, there's a post-tool hook"
+        }
+      ]
+    },
+    {
+      "q": "What does the practice quiz look like when Hamza runs it live?",
+      "answer": "Hamza runs the short quiz live, about 10 questions meant to take five minutes. One question has a coordinator spawn six parallel agents, each researching a different competitor, with their outputs concatenated. The chat leaned toward C, and Hamza doubts that is right [1]. Pick a wrong option and the quiz explains why it is wrong and what the right answer would be [2].\n\nFor deeper prep there is a study guide covering each domain, then a practice exam of about 55 questions, with more to be added. The questions stay the same between attempts, so Hamza suggests taking the sample questions from the GitHub repo and having Claude build you a separate exam [3].",
+      "citations": [
+        {
+          "start": 2693,
+          "end": 2733,
+          "speaker": "Hamza Farooq",
+          "quote": "A coordinator spawns 6 parallel agents, each researching a different competitor, their outputs are concatenated. … So, Balaji, who says, C. … I don't think the answer is C"
+        },
+        {
+          "start": 2750,
+          "end": 2766,
+          "speaker": "Hamza Farooq",
+          "quote": "if you click on a wrong answer, it will just tell you why this answer is wrong, and, you know, why, what would be the right answer."
+        },
+        {
+          "start": 2829,
+          "end": 2879,
+          "speaker": "Hamza Farooq",
+          "quote": "This exam has about, I think, 55 questions. I'll be adding more questions in the coming days … if you want to sort of build your own version, here's my GitHub. … Have Claude build you a separate exam."
+        }
+      ]
+    },
+    {
+      "q": "How should I approach the multiple-choice questions without falling for wrong answers?",
+      "answer": "Hamza's personal method, offered as a recommendation rather than a rule, is to ignore the options at first and work out your own answer. It took Hamza longer, but an answer reached that way stuck [1].\n\nAlso learn to spot the distractors. Hamza lists the usual ones [2]:\n\n- use a stronger system prompt\n- use a larger model\n- increase temperature\n- add few-shot examples\n\nFew-shot examples can be right in some use cases, but these options show up in almost every question, so Hamza treats them as a giveaway that they are not the fix [3].",
+      "citations": [
+        {
+          "start": 1916,
+          "end": 1947,
+          "speaker": "Hamza Farooq",
+          "quote": "my way of solving this exam, which I felt, you know, got me there, was… I did not look at what were the solution, what were the MCQ options. … But once I understood it, I would not forget it."
+        },
+        {
+          "start": 2484,
+          "end": 2507,
+          "speaker": "Hamza Farooq",
+          "quote": "like, someone will say, use a stronger system prompt, so you… that's never the answer. Or use a larger model, that's never the answer. Increase temperature, or add a few short examples."
+        },
+        {
+          "start": 2515,
+          "end": 2539,
+          "speaker": "Hamza Farooq",
+          "quote": "But it's an answer in some use cases. … you will see them almost in every question as a way to solve something, so it's a dead giveaway that they will not work for you"
+        }
+      ]
+    }
+  ],
+  "cover_chapter": 3
+}

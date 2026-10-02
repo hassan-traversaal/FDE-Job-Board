@@ -1,0 +1,71 @@
+{
+  "course": {
+    "name": "Claude Code in Practice",
+    "slug": "claude-code-in-practice",
+    "eyebrow": "Traversaal Academy · Open course",
+    "pitch": "Our highest-rated course, open-sourced. Five live sessions with Hamza Farooq and Aishwarya Ashok, free to watch, broken into chapters you can jump between, with a bot that answers from the recordings and takes you to the exact second.",
+    "cohort": "Cohort 02 · June 2026",
+    "rating_note": "Highest-rated course on Maven by Traversaal",
+    "instructors": [
+      {
+        "name": "Hamza Farooq",
+        "role": "Founder & CEO, Traversaal.ai",
+        "detail": "Adjunct Professor at UCLA",
+        "photo": "assets/img/hamza.jpg"
+      },
+      {
+        "name": "Aishwarya Ashok",
+        "role": "AI Product Builder & Startup Advisor",
+        "detail": "Podcaster, The Founder's Foyer",
+        "photo": "assets/img/aishwarya.jpg"
+      }
+    ]
+  },
+  "sessions": [
+    {
+      "id": "s1",
+      "date": "2026-06-05",
+      "deck": "claude-code-c02-m01",
+      "video": true,
+      "gcs": "hamza_moment_search/hamza-s1/source.mp4"
+    },
+    {
+      "id": "s2",
+      "date": "2026-06-12",
+      "deck": "claude-code-c02-m02",
+      "video": true,
+      "gcs": "hamza_moment_search/hamza-s2/source.mp4"
+    },
+    {
+      "id": "s3",
+      "date": "2026-06-21",
+      "deck": "claude-code-c02-m03",
+      "video": true,
+      "gcs": "hamza_moment_search/hamza-s3/source.mp4"
+    },
+    {
+      "id": "s4",
+      "date": "2026-06-28",
+      "deck": "claude-code-c02-m04",
+      "video": true,
+      "gcs": "hamza_moment_search/hamza-s4/source.mp4"
+    },
+    {
+      "id": "s5",
+      "date": "2026-06-03",
+      "deck": "",
+      "video": true,
+      "bonus": true,
+      "gcs": "hamza_moment_search/hamza-s5/source.mp4"
+    }
+  ],
+  "featured": {
+    "session": "s1",
+    "question": 1
+  },
+  "featured_reviews": [
+    "d06b6c07-0780-4a68-8f3c-455eff5b380c",
+    "303e3240-37cc-4acc-8e46-13267e1297d3",
+    "11cea913-27a5-4903-8429-bcb5cc56aec9"
+  ]
+}
