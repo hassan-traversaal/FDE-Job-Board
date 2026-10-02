@@ -26,6 +26,7 @@ export function AgentSystem() {
   const [q, setQ] = useState(0); // active question
   const [tick, setTick] = useState(0); // changes on every run, restarting the CSS animations
   const [runs, setRuns] = useState(1284);
+  const [elapsed, setElapsed] = useState(0); // seconds played in the current chapter
   const hold_ = useRef(0); // after a click, stay on the visitor's tab for this many more ticks
   const steps = useRef(0);
   const modeRef = useRef<Mode>("build");
@@ -40,6 +41,7 @@ export function AgentSystem() {
       hold_.current -= 1;
       const next: Mode = flip ? (modeRef.current === "build" ? "teach" : "build") : modeRef.current;
       setTick((t) => t + 1);
+      setElapsed(0);
       setMode(next);
       if (next === "build") {
         setSys((x) => (x + 1) % s.systems.length);
@@ -48,7 +50,11 @@ export function AgentSystem() {
         setQ((x) => (x + 1) % s.teach.questions.length);
       }
     }, 2800);
-    return () => clearInterval(id);
+    const clockId = setInterval(() => setElapsed((e) => e + 1), 1000);
+    return () => {
+      clearInterval(id);
+      clearInterval(clockId);
+    };
   }, []);
 
   useEffect(() => {
@@ -58,6 +64,7 @@ export function AgentSystem() {
   const hold = () => {
     hold_.current = 5;
     setTick((t) => t + 1);
+    setElapsed(0);
   };
   const pickMode = (m: Mode) => {
     hold();
@@ -91,12 +98,14 @@ export function AgentSystem() {
     el.style.setProperty("--ry", `${(x * 8).toFixed(2)}deg`);
     el.style.setProperty("--rx", `${(-y * 6).toFixed(2)}deg`);
     el.style.setProperty("--gx", `${(x * -22).toFixed(1)}px`);
+    el.style.setProperty("--mx", `${(e.clientX - r.left).toFixed(0)}px`);
+    el.style.setProperty("--my", `${(e.clientY - r.top).toFixed(0)}px`);
     el.style.setProperty("--gy", `${(y * -22).toFixed(1)}px`);
   };
   const onLeave = () => {
     const el = fig.current;
     if (!el) return;
-    for (const v of ["--ry", "--rx", "--gx", "--gy"]) el.style.removeProperty(v);
+    for (const v of ["--ry", "--rx", "--gx", "--gy", "--mx", "--my"]) el.style.removeProperty(v);
   };
 
   return (
@@ -158,8 +167,12 @@ export function AgentSystem() {
               </span>
               <span className="sys__what">
                 <b>{s.agent.name}</b>
-                <span key={`ev${tick}`} className="sys__event">
-                  {s.events[sys]}
+                <span key={`ev${tick}`} className="sys__steps">
+                  {s.events[sys].map((step, k) => (
+                    <span key={step} style={{ "--k": k } as CSSProperties}>
+                      {step}
+                    </span>
+                  ))}
                 </span>
               </span>
               <span className="sys__live" aria-hidden="true">
@@ -200,7 +213,7 @@ export function AgentSystem() {
               </ul>
               <div className="sys__video" aria-hidden="true">
                 <span className="sys__play" />
-                <span className="sys__time mono">{clock(chapter.at)}</span>
+                <span className="sys__time mono">{clock(chapter.at + elapsed)}</span>
                 <span className="sys__scrub">
                   <i key={`sc${tick}`} />
                 </span>

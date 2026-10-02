@@ -59,12 +59,12 @@ export const heroSystem = {
     { name: "CRM", icon: "M12 11.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM5 20a7 7 0 0 1 14 0" },
   ],
   agent: { name: "AI agent" },
-  // One line per system: what the agent does when that system fires.
+  // Three steps per system: what the agent does, in order, when that system fires.
   events: [
-    "Ticket read, refund policy found, reply drafted",
-    "Order status checked, delay explained",
-    "Policy clause cited, answer grounded",
-    "Account history pulled, tone matched",
+    ["Read ticket", "Found refund policy", "Drafted reply"],
+    ["Checked order", "Found the delay", "Explained it"],
+    ["Found clause", "Cited it", "Answered"],
+    ["Pulled history", "Matched tone", "Replied"],
   ],
   controls: [
     { name: "Evals", note: "Run on every change" },
@@ -215,7 +215,6 @@ export const course = {
 
 export const results = {
   title: "Some of the enterprise agents we've shipped.",
-  line: "Built for a Fortune 500 retailer and other enterprise teams, with more work beyond these.",
   // Sector labels follow the tags on traversaal.ai/labs.
   items: [
     { sector: "Fortune 500 retail", agent: "Retail delivery agent", forWhom: "Multi-agent decision layer for a Fortune 500 retailer", big: "~73%", what: "of review cases closed automatically" },

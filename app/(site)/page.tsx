@@ -325,7 +325,6 @@ export default function Home() {
               <h2 id="results-title" className="sechead__title">
                 {results.title}
               </h2>
-              <p className="sechead__line">{results.line}</p>
             </header>
             <ul className="ledger">
               {results.items.map((r, k) => (
