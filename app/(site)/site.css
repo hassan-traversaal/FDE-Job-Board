@@ -253,9 +253,9 @@
 
 .sys__class {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   gap: 10px;
-  align-items: stretch;
+  align-items: start;
 }
 
 .sys__chapters {
@@ -309,18 +309,35 @@
 
 .sys__video {
   position: relative;
-  min-height: 150px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
   border-radius: 14px;
-  background:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 55%),
-    #1b1d22;
+  background: #1b1d22;
   display: grid;
   place-items: center;
 }
 
+.sys__video img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sys__video::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(15, 16, 19, 0.75));
+}
+
 .sys__play {
-  width: 46px;
-  height: 46px;
+  position: relative;
+  z-index: 1;
+  width: 38px;
+  height: 38px;
+  opacity: 0.92;
   border-radius: 50%;
   background: var(--coral);
   display: grid;
@@ -331,11 +348,12 @@
   content: "";
   margin-left: 3px;
   border-style: solid;
-  border-width: 8px 0 8px 13px;
+  border-width: 7px 0 7px 11px;
   border-color: transparent transparent transparent var(--ink);
 }
 
 .sys__time {
+  z-index: 1;
   position: absolute;
   left: 12px;
   bottom: 18px;
@@ -344,6 +362,7 @@
 }
 
 .sys__scrub {
+  z-index: 1;
   position: absolute;
   left: 12px;
   right: 12px;

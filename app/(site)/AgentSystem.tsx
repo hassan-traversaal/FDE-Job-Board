@@ -33,6 +33,9 @@ export function AgentSystem() {
   const fig = useRef<HTMLElement>(null);
 
   const chapter = s.teach.chapters[s.teach.questions[q].chapter];
+  // A preview plays faster than real time, so a new frame of the recording shows every few seconds.
+  const now = chapter.at + elapsed * 6;
+  const frame = String(Math.min(Math.floor(now / 60), 117)).padStart(4, "0");
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -212,8 +215,11 @@ export function AgentSystem() {
                 ))}
               </ul>
               <div className="sys__video" aria-hidden="true">
+                {/* A real frame from the Session 1 recording, one per minute (course/web/assets/frames). */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={`/assets/frames/s1/t/${frame}.jpg`} alt="" width={640} height={360} />
                 <span className="sys__play" />
-                <span className="sys__time mono">{clock(chapter.at + elapsed)}</span>
+                <span className="sys__time mono">{clock(now)}</span>
                 <span className="sys__scrub">
                   <i key={`sc${tick}`} />
                 </span>
