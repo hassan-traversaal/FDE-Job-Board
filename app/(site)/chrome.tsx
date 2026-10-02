@@ -71,7 +71,7 @@ export function Nav() {
         </Link>
         <NavLinks />
         <a className="nav__cta" href={links.freeCourse}>
-          Start free
+          Start free course
           <Arrow />
         </a>
       </div>

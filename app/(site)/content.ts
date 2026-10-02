@@ -38,10 +38,10 @@ export const trained = [
 export const hero = {
   // Two equal lines: the work, then the teaching. The marked word gets the coral block.
   lines: [
-    { pre: "We ", mark: "build", post: " enterprise AI agents." },
+    { pre: "We ", mark: "build", post: " enterprise AI agents for Fortune 500." },
     { pre: "We ", mark: "teach", post: " you how." },
   ],
-  sub: "Our forward deployed engineers embed with your team and ship AI agents to production. Our courses teach you to build them yourself.",
+  sub: "Our forward deployed engineers embed with your team to build AI agents. Our courses and trainings are separate: they teach your engineers to build their own.",
   primary: "Start the free course",
   secondary: "Work with us",
   lead: "Led by Hamza Farooq",
@@ -64,7 +64,14 @@ export const heroSystem = {
     { name: "Monitoring", note: "Every run traced" },
     { name: "Human review", note: "For high-risk actions" },
   ],
-  chips: ["Embedded with your team", "Your team trained to run it"],
+  chips: ["Our FDEs, embedded with your team", "Our FDE trainings, taught separately"],
+  // One line per system for the interactive hero: what the agent does when that system fires.
+  events: [
+    "Ticket read, refund policy found, reply drafted",
+    "Order status checked, delay explained",
+    "Policy clause cited, answer grounded",
+    "Account history pulled, tone matched",
+  ],
 };
 
 /** Companies whose latest board listing appears in the home-page role ticker (see roleHighlights.ts). */
@@ -89,16 +96,14 @@ export const tickerCompanies = [
   "Snorkel AI",
 ];
 
-/** Counts come from the board's own data at build time (see jobStats.ts). */
 export const market = {
   title: "The FDE job market, tracked weekly.",
-  line: (companies: number, since: string) => `forward deployed roles from ${companies} companies, posted since ${since} and listed on our job board.`,
   cta: "Browse the job board",
 };
 
 export const learn = {
   title: "Learn FDE",
-  line: "Three levels. Start free, go live with a cohort, or bring the whole team.",
+  line: "We offer individual courses and enterprise training.",
   offers: [
     {
       level: "Level 1",
@@ -144,7 +149,6 @@ export const work = {
 
 export const method = {
   title: "How an engagement runs.",
-  line: "Five stages. Each one ends with something your team keeps.",
   steps: [
     {
       name: "Embed",
@@ -179,7 +183,7 @@ export const method = {
 export const course = {
   title: "Take our first course for free.",
   name: "Claude Code for Forward Deployed Engineering",
-  body: "Five recorded sessions with Hamza Farooq and Aishwarya Ashok, cut into short chapters. Ask a question and Moment Search jumps to the second in the recordings that answers it. One free account keeps your place.",
+  body: "Our top-rated course on Maven, now open source, so you can begin your FDE journey with us. Five recorded sessions with Hamza Farooq and Aishwarya Ashok, cut into short chapters.",
   cta: "Start the free course",
   anatomy: ["Sessions", "Chapters", "Video", "Transcript", "Moment Search"],
   // The illustration below: real session and chapter titles, and one of the course's suggested questions.
@@ -192,8 +196,8 @@ export const course = {
 };
 
 export const results = {
-  title: "Enterprise agents we've shipped.",
-  line: "Built for a Fortune 500 retailer and other enterprise teams. Anonymised results from Traversaal Labs.",
+  title: "Some of the enterprise agents we've shipped.",
+  line: "Built for a Fortune 500 retailer and other enterprise teams, with more work beyond these.",
   // Sector labels follow the tags on traversaal.ai/labs.
   items: [
     { sector: "Fortune 500 retail", agent: "Retail delivery agent", forWhom: "Multi-agent decision layer for a Fortune 500 retailer", big: "~73%", what: "of review cases closed automatically" },
@@ -271,7 +275,6 @@ export const workPage = {
     { name: "Hamza Farooq", role: "Founder and CEO. Ex-Google and Walmart Labs; adjunct professor at UCLA and UMN.", photo: "/site/hamza-farooq.png", w: 1254 },
     { name: "Jaya Rajwani", role: "Director of AI. Builds Traversaal's agent platforms.", photo: "/site/people/jaya-rajwani.png", w: 400 },
   ],
-  trainedTitle: "Teams we've trained",
 };
 
 export const forms = {

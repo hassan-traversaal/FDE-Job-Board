@@ -5,7 +5,6 @@ import { Reveal } from "./Reveal";
 import { ReviewWall } from "./ReviewWall";
 import { reviews, reviewSource } from "./reviews";
 import { AgentSystem } from "./AgentSystem";
-import { jobStats } from "./jobStats";
 import { roleHighlights as roles, type RoleHighlight } from "./roleHighlights";
 import { close, course, hero, learn, links, market, method, results, voices, work } from "./content";
 
@@ -74,7 +73,6 @@ const featuredFirst = reviews
   .map(({ r }) => r);
 
 export default function Home() {
-  const stats = jobStats();
   const half = Math.ceil(roles.length / 2);
 
   return (
@@ -187,7 +185,7 @@ export default function Home() {
                 <Btn href={links.contact}>
                   {work.cta}
                 </Btn>
-                <a className="textlink textlink--light" href="#method">
+                <a className="textlink" href="#method">
                   How an engagement runs
                 </a>
               </div>
@@ -202,15 +200,6 @@ export default function Home() {
               <h2 id="market-title" className="market__title">
                 {market.title}
               </h2>
-              {stats && (
-                <p className="market__line">
-                  <b className="market__count">{stats.roles.toLocaleString("en-US")}</b>
-                  <span>
-                    {market.line(stats.companies, stats.since)}
-                    {stats.updated && <span className="market__date"> Updated {stats.updated}.</span>}
-                  </span>
-                </p>
-              )}
             </div>
             <Btn href={links.jobs} tone="ink">
               {market.cta}
@@ -306,7 +295,6 @@ export default function Home() {
               <h2 id="method-title" className="sechead__title">
                 {method.title}
               </h2>
-              <p className="sechead__line">{method.line}</p>
             </header>
             <ol className="track">
               {method.steps.map((s, k) => (

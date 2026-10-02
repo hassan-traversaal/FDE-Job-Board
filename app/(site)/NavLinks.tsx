@@ -5,10 +5,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 
 const items = [
-  { href: "/#learn", label: "Learn", match: "" },
-  { href: "/teams", label: "Team training", match: "/teams" },
+  { href: "/teams", label: "Train your team", match: "/teams" },
   { href: "/work-with-us", label: "Work with us", match: "/work-with-us" },
-  { href: "/jobs", label: "Job board", match: "/jobs" },
 ];
 
 function Links({ path, onNavigate }: { path: string; onNavigate?: () => void }) {

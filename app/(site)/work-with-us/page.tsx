@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { TrainedLogos } from "../chrome";
 import { workPage } from "../content";
 import { LeadForm } from "../LeadForm";
 
@@ -61,13 +60,6 @@ export default function WorkWithUsPage() {
           <LeadForm kind="engagement" />
         </div>
       </div>
-
-      <section className="wrap formpage__trained" aria-labelledby="trained-title">
-        <h2 id="trained-title" className="trained__title">
-          {workPage.trainedTitle}
-        </h2>
-        <TrainedLogos />
-      </section>
     </main>
   );
 }

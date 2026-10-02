@@ -8,8 +8,7 @@
   --paper: #ffffff;
   --mist: #f4f5f7;
   --ink: #0f1013;
-  --navy: #142a44;
-  --on-navy: #d6dfea;
+  --sky: #dce8f7;
   --ink-2: #43464f;
   --ink-3: #5f636e;
   --line: #e3e5e9;
@@ -92,10 +91,6 @@ html {
   border-radius: 6px;
 }
 
-.course :focus-visible,
-.door--work :focus-visible {
-  outline-color: #fff;
-}
 
 .mono {
   font-family: var(--f-mono);
@@ -208,11 +203,6 @@ html {
   box-shadow: 0 14px 28px -16px rgba(15, 16, 19, 0.7);
 }
 
-.course .btn--coral,
-.door--work .btn--coral {
-  box-shadow: none;
-}
-
 .btn--paper {
   background: #fff;
   color: var(--ink);
@@ -226,10 +216,6 @@ html {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-}
-
-.textlink--light {
-  color: #fff;
 }
 
 /* ---------- Nav ---------- */

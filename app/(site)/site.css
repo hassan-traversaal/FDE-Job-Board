@@ -173,7 +173,15 @@
   box-shadow:
     0 0 0 1px rgba(15, 16, 19, 0.06),
     0 50px 90px -40px rgba(15, 16, 19, 0.5);
+  transform: perspective(1200px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.35s var(--ease);
   animation: rise 0.9s var(--ease) 0.2s both;
+}
+
+.sys__disc,
+.sys__ring {
+  translate: var(--gx, 0) var(--gy, 0);
+  transition: translate 0.5s var(--ease);
 }
 
 .sys__bar {
@@ -185,6 +193,23 @@
   border-bottom: 1px solid var(--line);
   font-size: 12px;
   color: var(--ink-3);
+}
+
+.sys__runs {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-2);
+}
+
+.sys__runs i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #16a34a;
+  animation: ping 1.8s ease-out infinite;
 }
 
 .sys__label {
@@ -205,15 +230,40 @@
 
 .sys__inputs li {
   display: flex;
+  min-width: 0;
+  animation: sysIn 0.5s var(--ease) calc(0.55s + var(--k) * 0.08s) both;
+}
+
+.sys__inputs button {
+  display: flex;
   align-items: center;
   gap: 10px;
+  width: 100%;
   min-width: 0;
+  min-height: 44px;
   padding: 11px 12px;
+  border: 1.5px solid transparent;
   border-radius: 14px;
   background: var(--mist);
-  font-size: 14px;
-  font-weight: 600;
-  animation: sysIn 0.5s var(--ease) calc(0.55s + var(--k) * 0.08s) both;
+  color: var(--ink);
+  font: 600 14px/1.2 var(--f-body);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color 0.25s,
+    border-color 0.25s,
+    transform 0.25s var(--ease);
+}
+
+.sys__inputs button:hover {
+  transform: translateY(-2px);
+  border-color: var(--ink);
+}
+
+.sys__inputs button.is-on {
+  background: var(--coral-soft);
+  border-color: var(--coral);
+  animation: sysTap 0.5s var(--ease);
 }
 
 .sys__icon {
@@ -254,6 +304,27 @@
   width: 2px;
   height: 14px;
   background: var(--coral);
+}
+
+.sys__packet {
+  position: absolute;
+  z-index: 1;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 50%;
+  background: var(--coral);
+  box-shadow: 0 0 0 4px rgba(255, 75, 43, 0.25);
+  left: var(--from, 50%);
+  top: 0;
+  animation: packetIn 0.85s var(--ease) both;
+}
+
+.sys__packet--out {
+  left: 50%;
+  top: 0;
+  opacity: 0;
+  animation: packetOut 0.7s var(--ease) 1.05s both;
 }
 
 .sys__link--in::before {
@@ -323,6 +394,10 @@
   line-height: 1.35;
 }
 
+.sys__event {
+  animation: type 0.9s steps(30, end) 0.8s both;
+}
+
 .sys__live {
   display: inline-flex;
   align-items: center;
@@ -352,10 +427,11 @@
   padding: 11px 12px;
   border-radius: 14px;
   border: 1px solid var(--line);
-  animation: sysIn 0.5s var(--ease) calc(1.15s + var(--k) * 0.08s) both;
+  animation: sysCheck 0.45s var(--ease) calc(1.15s + var(--k) * 0.22s) both;
 }
 
 .sys__controls li::before {
+  animation: sysTick 0.4s var(--ease) calc(1.15s + var(--k) * 0.22s) both;
   content: "";
   grid-row: span 2;
   width: 20px;
@@ -456,8 +532,7 @@
 }
 
 .door--work {
-  background: var(--navy);
-  color: #fff;
+  background: var(--sky);
 }
 
 .door__title {
@@ -472,7 +547,7 @@
 }
 
 .door--work .door__line {
-  color: var(--on-navy);
+  color: var(--ink-2);
 }
 
 .ladder {
@@ -580,7 +655,7 @@
   align-items: center;
   gap: 8px 0;
   font: 500 13px/1.2 var(--f-mono);
-  color: var(--on-navy);
+  color: var(--ink-2);
 }
 
 .door__method li {
@@ -597,7 +672,7 @@
 }
 
 .door__method li:last-child {
-  color: var(--coral-on-dark);
+  color: var(--coral-text);
 }
 
 .gets {
@@ -611,7 +686,7 @@
   gap: 12px;
   padding: 18px 20px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.06);
+  background: #fff;
   font-size: 16px;
   line-height: 1.4;
 }
@@ -814,8 +889,7 @@
 .course {
   position: relative;
   overflow: hidden;
-  background: var(--ink);
-  color: #fff;
+  background: var(--mist);
   padding-block: var(--sec);
 }
 
@@ -861,7 +935,7 @@
   max-width: 36rem;
   font-size: 18px;
   line-height: 1.6;
-  color: #c3c7cf;
+  color: var(--ink-2);
 }
 
 .anatomy {
@@ -887,7 +961,8 @@
 .anatomy .chip {
   padding: 9px 15px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid #cdd0d6;
+  background: #fff;
   font-size: 14px;
   font-weight: 600;
 }
@@ -904,7 +979,7 @@
   border-radius: 26px;
   background: #fff;
   color: var(--ink);
-  box-shadow: 0 60px 110px -40px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 50px 90px -40px rgba(15, 16, 19, 0.5);
   transform: rotate(1.5deg);
 }
 
@@ -2285,6 +2360,53 @@ button.btn:disabled {
   }
 }
 
+@keyframes sysTap {
+  40% {
+    transform: scale(0.96);
+  }
+}
+
+@keyframes packetIn {
+  from {
+    left: var(--from, 50%);
+    top: -6px;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  to {
+    left: 50%;
+    top: 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes packetOut {
+  from {
+    top: 0;
+    opacity: 1;
+  }
+  to {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes sysCheck {
+  from {
+    opacity: 0.4;
+    background: var(--mist);
+    transform: translateY(6px);
+  }
+}
+
+@keyframes sysTick {
+  from {
+    transform: scale(0);
+  }
+}
+
 @keyframes sysPop {
   from {
     opacity: 0;
@@ -2552,11 +2674,6 @@ button.btn:disabled {
   .sys__disc,
   .sys__ring,
   .sys__card,
-  .sys__inputs li,
-  .sys__link,
-  .sys__agent,
-  .sys__controls li,
-  .sys__chip,
   .msearch__q,
   .msearch__hit {
     animation: none;

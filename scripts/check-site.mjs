@@ -4,7 +4,6 @@ import { load } from "cheerio";
 
 const base = new URL(process.env.SITE_URL ?? "http://localhost:3200");
 assert.ok(["localhost", "127.0.0.1"].includes(base.hostname), "Use a local test server.");
-let homeCount;
 let boardCount;
 for (const path of ["/", "/teams", "/work-with-us", "/jobs"]) {
   const response = await fetch(new URL(path, base));
@@ -16,9 +15,8 @@ for (const path of ["/", "/teams", "/work-with-us", "/jobs"]) {
   assert.equal(new URL($("link[rel=canonical]").attr("href")).href, new URL(path, "https://fde.traversaal.ai").href);
   assert.ok($("meta[property='og:image']").attr("content")?.endsWith("/site/og.png"));
   assert.equal($("meta[name='twitter:card']").attr("content"), "summary_large_image");
-  assert.equal($(".mnav__panel a").length, 4, `${path} needs mobile navigation`);
+  assert.equal($(".mnav__panel a").length, 2, `${path} needs mobile navigation`);
   if (path === "/") {
-    homeCount = Number($(".market__count").text().replaceAll(",", ""));
     const chips = $(".lane__track:not([aria-hidden]) .role__link");
     assert.ok(chips.length >= 8, "Home needs a role ticker");
     chips.each((_, a) => assert.match($(a).attr("href") ?? "", /^https:\/\/.+\/.+/, "Ticker roles link to the opening"));
@@ -33,7 +31,6 @@ for (const path of ["/", "/teams", "/work-with-us", "/jobs"]) {
   console.log(`PASS ${path}: content, navigation and sharing metadata`);
 }
 assert.ok(boardCount > 0);
-assert.equal(homeCount, boardCount, "Home and board must use the same role count");
 for (const path of ["/site/og.png", "/sitemap.xml", "/robots.txt"]) {
   const response = await fetch(new URL(path, base));
   assert.equal(response.status, 200, `${path} must be available`);
