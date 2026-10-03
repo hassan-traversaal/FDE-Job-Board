@@ -35,6 +35,10 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "pbs.twimg.com", pathname: "/profile_images/**" },
     ],
   },
+  async headers() {
+    // Palette preview branch: keep this deployment out of search results.
+    return [{ source: "/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] }];
+  },
   async rewrites() {
     return coursePaths.map((source) => ({ source, destination: `${course}${source}` }));
   },
