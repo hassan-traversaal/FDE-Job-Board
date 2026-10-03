@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { fontVars } from "../fonts";
 import { Footer, Nav } from "./chrome";
 import "../brand.css";
+import "../palettes.css";
+import PaletteSwitcher from "../PaletteSwitcher";
 import "./site.css";
 
 export const metadata: Metadata = {
@@ -32,6 +34,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         {children}
         <Footer />
+        <PaletteSwitcher />
       </body>
     </html>
   );

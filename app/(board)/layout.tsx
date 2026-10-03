@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Footer, Nav } from "../(site)/chrome";
 import { fontVars } from "../fonts";
 import "../brand.css";
+import "../palettes.css";
+import PaletteSwitcher from "../PaletteSwitcher";
 import "./board.css";
 
 export const metadata: Metadata = {
@@ -24,6 +26,7 @@ export default function BoardLayout({ children }: { children: React.ReactNode })
         <Nav />
         {children}
         <Footer />
+        <PaletteSwitcher />
       </body>
     </html>
   );

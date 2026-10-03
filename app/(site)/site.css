@@ -171,8 +171,8 @@
   border-radius: 28px;
   background: #fff;
   box-shadow:
-    0 0 0 1px rgba(15, 16, 19, 0.06),
-    0 50px 90px -40px rgba(15, 16, 19, 0.5);
+    0 0 0 1px rgba(var(--ink-rgb), 0.06),
+    0 50px 90px -40px rgba(var(--ink-rgb), 0.5);
   transform: perspective(1200px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
   transition: transform 0.35s var(--ease);
   animation: rise 0.9s var(--ease) 0.2s both;
@@ -312,7 +312,7 @@
   aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 14px;
-  background: #1b1d22;
+  background: var(--ink-deep);
   display: grid;
   place-items: center;
 }
@@ -329,7 +329,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 55%, rgba(15, 16, 19, 0.75));
+  background: linear-gradient(180deg, transparent 55%, rgba(var(--ink-rgb), 0.75));
 }
 
 .sys__play {
@@ -414,7 +414,7 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #16a34a;
+  background: var(--green-dot);
   animation: ping 1.8s ease-out infinite;
 }
 
@@ -524,7 +524,7 @@
   margin: -5px 0 0 -5px;
   border-radius: 50%;
   background: var(--coral);
-  box-shadow: 0 0 0 4px rgba(255, 75, 43, 0.25);
+  box-shadow: 0 0 0 4px rgba(var(--coral-rgb), 0.25);
   left: var(--from, 50%);
   top: 0;
   animation: packetIn 0.85s var(--ease) both;
@@ -566,7 +566,7 @@
   border-radius: 20px;
   background: var(--coral);
   color: var(--ink);
-  box-shadow: 0 20px 36px -22px rgba(15, 16, 19, 0.6);
+  box-shadow: 0 20px 36px -22px rgba(var(--ink-rgb), 0.6);
   animation: sysPop 0.6s var(--ease) 0.85s both;
 }
 
@@ -640,7 +640,7 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(220px circle at var(--mx, -400px) var(--my, -400px), rgba(255, 75, 43, 0.13), transparent 70%);
+  background: radial-gradient(220px circle at var(--mx, -400px) var(--my, -400px), rgba(var(--coral-rgb), 0.13), transparent 70%);
   pointer-events: none;
 }
 
@@ -661,7 +661,7 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #16a34a;
+  background: var(--green-dot);
 }
 
 .sys__controls li {
@@ -685,7 +685,7 @@
   margin-top: 1px;
   border-radius: 50%;
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 10.5l3 3 6-7' fill='none' stroke='%230f1013' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 10.5l3 3 6-7' fill='none' stroke='%232b3245' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
       center / 20px no-repeat,
     var(--coral);
 }
@@ -778,8 +778,8 @@
   background: #fff;
   text-decoration: none;
   box-shadow:
-    0 1px 0 rgba(15, 16, 19, 0.04),
-    0 14px 28px -20px rgba(15, 16, 19, 0.35);
+    0 1px 0 rgba(var(--ink-rgb), 0.04),
+    0 14px 28px -20px rgba(var(--ink-rgb), 0.35);
   transition:
     transform 0.3s var(--ease),
     box-shadow 0.3s var(--ease);
@@ -788,8 +788,8 @@
 .rung:hover {
   transform: translate(6px, -3px);
   box-shadow:
-    0 1px 0 rgba(15, 16, 19, 0.04),
-    0 22px 38px -20px rgba(15, 16, 19, 0.45);
+    0 1px 0 rgba(var(--ink-rgb), 0.04),
+    0 22px 38px -20px rgba(var(--ink-rgb), 0.45);
 }
 
 .rung:hover .arrow {
@@ -840,7 +840,7 @@
 .rung--lead {
   background: var(--coral);
   padding-block: 24px;
-  box-shadow: 0 20px 36px -22px rgba(15, 16, 19, 0.5);
+  box-shadow: 0 20px 36px -22px rgba(var(--ink-rgb), 0.5);
 }
 
 .rung--lead .rung__level,
@@ -909,7 +909,7 @@
   margin-top: 1px;
   border-radius: 50%;
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 10.5l3 3 6-7' fill='none' stroke='%230f1013' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 10.5l3 3 6-7' fill='none' stroke='%232b3245' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
       center / 20px no-repeat,
     var(--coral);
 }
@@ -1019,7 +1019,7 @@
   width: 280px;
   border-radius: 20px;
   background: #fff;
-  box-shadow: 0 14px 28px -20px rgba(15, 16, 19, 0.55);
+  box-shadow: 0 14px 28px -20px rgba(var(--ink-rgb), 0.55);
   transition:
     transform 0.25s var(--ease),
     box-shadow 0.25s var(--ease);
@@ -1027,7 +1027,7 @@
 
 .role:hover {
   transform: translateY(-3px);
-  box-shadow: 0 22px 34px -20px rgba(15, 16, 19, 0.6);
+  box-shadow: 0 22px 34px -20px rgba(var(--ink-rgb), 0.6);
 }
 
 /* The whole card is the link. */
@@ -1189,7 +1189,7 @@
   border-radius: 26px;
   background: #fff;
   color: var(--ink);
-  box-shadow: 0 50px 90px -40px rgba(15, 16, 19, 0.5);
+  box-shadow: 0 50px 90px -40px rgba(var(--ink-rgb), 0.5);
   transform: rotate(1.5deg);
 }
 
@@ -1255,7 +1255,7 @@
   background: #fff;
   color: var(--ink);
   font-weight: 600;
-  box-shadow: 0 4px 12px -6px rgba(15, 16, 19, 0.3);
+  box-shadow: 0 4px 12px -6px rgba(var(--ink-rgb), 0.3);
 }
 
 .player__side li.now::before {
@@ -1269,7 +1269,7 @@
   border-radius: 16px;
   background:
     radial-gradient(circle at 30% 35%, rgba(255, 255, 255, 0.07), transparent 55%),
-    #1b1d22;
+    var(--ink-deep);
   display: grid;
   place-items: center;
 }
@@ -1702,7 +1702,7 @@
   background: #fff;
   font-size: 14px;
   font-weight: 600;
-  box-shadow: 0 10px 24px -12px rgba(15, 16, 19, 0.4);
+  box-shadow: 0 10px 24px -12px rgba(var(--ink-rgb), 0.4);
 }
 
 .who {
@@ -1939,7 +1939,7 @@
   padding: 24px;
   border-radius: 26px;
   background: #fff;
-  box-shadow: 0 18px 36px -28px rgba(15, 16, 19, 0.4);
+  box-shadow: 0 18px 36px -28px rgba(var(--ink-rgb), 0.4);
 }
 
 .rcard__head {
@@ -2095,7 +2095,7 @@ button.btn:disabled {
   left: -12vw;
   bottom: 4%;
   border-radius: 50%;
-  border: 2px solid rgba(15, 16, 19, 0.08);
+  border: 2px solid rgba(var(--ink-rgb), 0.08);
   pointer-events: none;
 }
 
@@ -2246,7 +2246,7 @@ button.btn:disabled {
   border-radius: 30px;
   background: #fff;
   color: var(--ink);
-  box-shadow: 0 40px 80px -40px rgba(15, 16, 19, 0.45);
+  box-shadow: 0 40px 80px -40px rgba(var(--ink-rgb), 0.45);
 }
 
 .formcard__title {
